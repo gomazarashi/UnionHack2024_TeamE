@@ -51,6 +51,7 @@ class CanvasStyle {
     }
 }
 
+/* 
 // インスタンスの生成と画面表示
 const canvasStyle = new CanvasStyle(canvas);
 canvasStyle.drawBackground(); // 背景の描画
@@ -59,3 +60,4 @@ canvasStyle.drawGameScreen(0, 3); // スコアとライフの表示
 // アイテムメニューの表示
 const items = ['Item 1', 'Item 2', 'Item 3'];
 canvasStyle.drawItemMenu(items);
+*/
