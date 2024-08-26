@@ -1,3 +1,7 @@
+/* 
+canvasや背景の見た目をいじるクラス。サイズ調整とか?基本cssの補助
+*/
+
 class CanvasStyle {
     constructor(canvas) {
         this.canvas = canvas;
