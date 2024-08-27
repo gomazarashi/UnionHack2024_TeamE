@@ -6,7 +6,7 @@ class gameView{
         this.canvasStyle = new CanvasStyle(canvas,ctx);
         this.flag = false;
 
-        //this.enemy = new Enemy(10,10);
+        this.enemy = new Enemy(10,10);
     }
 
     update(){
@@ -23,8 +23,8 @@ class gameView{
         this.player.drawPlayer(this.ctx);
         this.player.bulletControl(this.ctx);
 
-        // this.enemy.moveEnemy();
-        // this.enemy.drawEnemy(this.ctx);
+        this.enemy.moveEnemy();
+        this.enemy.drawEnemy(this.ctx);
 
         if (this.flag) {
             requestAnimationFrame(()=>this.update());
