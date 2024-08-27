@@ -1,0 +1,25 @@
+#home{
+    width: 640px;
+    height: 480px;
+    background-color: black;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+#home h1{
+    color: white;
+    width: 240px;
+    height: 50px;
+    text-align: center;
+}
+
+#home button{
+    color: white;
+    background: none;
+    width: 240px;
+    height: 50px;
+    font-size: large;
+}
