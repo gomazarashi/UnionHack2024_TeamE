@@ -6,7 +6,7 @@ class CanvasStyle {
     constructor(canvas) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
-        
+
         // デバイスピクセル比率に基づいてキャンバスの解像度を設定 ここを設定しないと文字がぼやける
         this.dpr = window.devicePixelRatio || 1;
 
@@ -39,7 +39,7 @@ class CanvasStyle {
         const menuHeight = 100;
         const menuX = 10;
         const menuY = (this.canvas.height / this.dpr) - menuHeight - 10;
-        
+
         this.ctx.fillStyle = 'rgba(50, 50, 50, 0.8)';
         this.ctx.fillRect(menuX, menuY, menuWidth, menuHeight);
 

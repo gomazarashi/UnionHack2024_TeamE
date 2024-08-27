@@ -15,37 +15,37 @@ class playerControl {
 
     drawPlayer(ctx) {
         ctx.strokeStyle = "white";
-        ctx.strokeRect(this.positionX-15, this.positionY-10, 30, 20);
-        ctx.strokeRect(this.positionX-5, this.positionY-20, 10, 10)
+        ctx.strokeRect(this.positionX - 15, this.positionY - 10, 30, 20);
+        ctx.strokeRect(this.positionX - 5, this.positionY - 20, 10, 10)
     }
 
     movePlayer() {
-        if (this.controler.w&&this.controler.a) {
-            this.positionY -= (this.speed/Math.sqrt(2));
-            this.positionX -= (this.speed/Math.sqrt(2));
-        }else if(this.controler.w&&this.controler.d){
-            this.positionY -= (this.speed/Math.sqrt(2));
-            this.positionX += (this.speed/Math.sqrt(2));
-        }else if(this.controler.s&&this.controler.a){
-            this.positionY += (this.speed/Math.sqrt(2));
-            this.positionX -= (this.speed/Math.sqrt(2));
-        }else if(this.controler.s&&this.controler.d){
-            this.positionY += (this.speed/Math.sqrt(2));
-            this.positionX += (this.speed/Math.sqrt(2));
-        }else if (this.controler.w) {
+        if (this.controler.w && this.controler.a) {
+            this.positionY -= (this.speed / Math.sqrt(2));
+            this.positionX -= (this.speed / Math.sqrt(2));
+        } else if (this.controler.w && this.controler.d) {
+            this.positionY -= (this.speed / Math.sqrt(2));
+            this.positionX += (this.speed / Math.sqrt(2));
+        } else if (this.controler.s && this.controler.a) {
+            this.positionY += (this.speed / Math.sqrt(2));
+            this.positionX -= (this.speed / Math.sqrt(2));
+        } else if (this.controler.s && this.controler.d) {
+            this.positionY += (this.speed / Math.sqrt(2));
+            this.positionX += (this.speed / Math.sqrt(2));
+        } else if (this.controler.w) {
             this.positionY -= this.speed;
-        }else if (this.controler.s) {
+        } else if (this.controler.s) {
             this.positionY += this.speed;
-        }else if (this.controler.a) {
+        } else if (this.controler.a) {
             this.positionX -= this.speed;
-        }else if (this.controler.d) {
+        } else if (this.controler.d) {
             this.positionX += this.speed;
         }
         //画面端の指定
         if (this.positionX < 0) {
             this.positionX = 0;
         }
-        if (this.positionX>640) {
+        if (this.positionX > 640) {
             this.positionX = 640;
         }
         if (this.positionY < 0) {
