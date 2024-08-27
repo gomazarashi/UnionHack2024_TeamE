@@ -3,14 +3,18 @@ class playerControl {
         this.speed = 3;
         this.positionX = 320;
         this.positionY = 400;
+        
         this.controler = {
             a: false,
             s: false,
             d: false,
             w: false,
+            Space: false
         };
         window.addEventListener("keydown", this.handleKeyPress.bind(this));
         window.addEventListener("keyup", this.handleKeyRelease.bind(this));
+
+        this.bulletArray = new Array();
     }
 
     drawPlayer(ctx) {
@@ -41,6 +45,12 @@ class playerControl {
         } else if (this.controler.d) {
             this.positionX += this.speed;
         }
+
+        if (this.controler.Space) {
+            this.addBullet();
+            this.controler.Space=false;
+        }
+
         //画面端の指定
         if (this.positionX < 0) {
             this.positionX = 0;
@@ -56,7 +66,20 @@ class playerControl {
         }
     }
 
+    addBullet(){
+        this.bulletArray.push(new playerBullet(this.positionX,this.positionY));
+    }
+
+    bulletControl(ctx){
+        this.bulletArray = this.bulletArray.filter(bullet=>bullet.getExistence());
+        this.bulletArray.forEach(bullet=>{
+            bullet.moveBullet();
+            bullet.drawBullet(ctx);
+        })
+    }
+
     handleKeyPress(event) {
+        console.log(event.key);
         switch (event.key) {
             case "a":
                 this.controler.a = true;
@@ -69,6 +92,9 @@ class playerControl {
                 break;
             case "w":
                 this.controler.w = true;
+                break;
+            case " ":
+                this.controler.Space = true;
                 break;
         }
     }
@@ -86,6 +112,9 @@ class playerControl {
                 break;
             case "w":
                 this.controler.w = false;
+                break;
+            case " ":
+                this.controler.Space = true;
                 break;
         }
     }
