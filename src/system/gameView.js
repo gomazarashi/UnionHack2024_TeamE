@@ -10,6 +10,9 @@ class gameView {
 
         // 敵の弾を管理する配列
         this.enemyBullets = [];
+
+        // BGMを管理するインスタンスを生成
+        this.audioManager = new AudioManager();
     }
 
     update() {
@@ -68,10 +71,12 @@ class gameView {
 
     gameStart() {
         this.flag = true;
+        this.audioManager.playBGM(); // ゲーム開始時にBGMを再生
         this.update();
     }
 
     gameStop() {
         this.flag = false;
+        this.audioManager.stopBGM(); // ゲーム停止時にBGMを停止
     }
 }
