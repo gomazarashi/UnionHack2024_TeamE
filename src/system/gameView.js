@@ -6,7 +6,10 @@ class gameView {
         this.canvasStyle = new CanvasStyle(canvas, ctx);
         this.flag = false;
 
-        this.enemyManager = new enemyFrequency();
+        this.enemyManager = new enemyFrequency(120, this);
+
+        // 敵の弾を管理する配列
+        this.enemyBullets = [];
     }
 
     update() {
@@ -24,29 +27,43 @@ class gameView {
         // プレイヤーの弾の管理
         this.player.bulletControl(this.ctx);
 
-        // 敵の弾とプレイヤーの衝突判定
+        // 敵の弾の移動、描画、衝突判定
+        this.manageEnemyBullets();
+
+        this.enemyManager.management()
+        this.enemyManager.moveAllEnemy(this.player.bulletArray, this.canvasStyle, this.ctx);
+
+        // すべての敵が弾を発射する
         this.enemyManager.enemyList.forEach(enemy => {
             if (enemy && enemy.existence) {
-                enemy.shoot(); // 敵の弾を撃つ
-                enemy.bulletControl(this.ctx); // 敵の弾を描画
-
-                // 敵の弾とプレイヤーの衝突判定
-                enemy.enemyBulletArray.forEach(enemyBullet => {
-                    if (enemyBullet.getExistence() && enemyBullet.checkCollisionWithPlayer(this.player)) {
-                        this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
-                        enemyBullet.existence = false; // 敵の弾を消す これを消すと1度あたった弾に何度もあたる
-                        console.log('Player hit by enemy bullet!');
-                    }
-                });
+                enemy.shoot(); // 弾を発射させる
             }
         });
 
-        this.enemyManager.management()
-        this.enemyManager.moveAllEnemy(this.player.bulletArray,this.canvasStyle,this.ctx);
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
         }
+    }
+
+    manageEnemyBullets() {
+        // 敵の弾の存在をチェックして更新する
+        this.enemyBullets = this.enemyBullets.filter(bullet => bullet.getExistence());
+        this.enemyBullets.forEach(bullet => {
+            bullet.moveBullet();
+            bullet.drawBullet(this.ctx);
+
+            // プレイヤーとの衝突判定
+            if (bullet.checkCollisionWithPlayer(this.player)) {
+                this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                bullet.existence = false; // 弾を消す
+                console.log('Player hit by enemy bullet!');
+            }
+        });
+    }
+
+    addEnemyBullet(bullet) {
+        this.enemyBullets.push(bullet);
     }
 
     gameStart() {
