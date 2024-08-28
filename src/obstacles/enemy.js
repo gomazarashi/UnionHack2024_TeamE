@@ -58,4 +58,14 @@ class Enemy {
         }
     }
 
+    // 弾を管理するメソッド
+    bulletControl(ctx) {
+        this.enemyBulletArray = this.enemyBulletArray.filter((bullet) => bullet.getExistence());
+        this.enemyBulletArray.forEach((bullet) => {
+            bullet.moveBullet();
+            bullet.drawBullet(ctx);
+        });
+    }
+
+    
 }
