@@ -27,6 +27,7 @@ class gameView {
             this.player.bulletArray.forEach((bullet) => {
                 if (this.enemy.checkCollision(bullet)) {
                     console.log('Enemy hit!');
+                    this.canvasStyle.addScore(this.enemy.getEnemyScore()); // スコアを加算
                 }
             });
             this.enemy.moveEnemy();
