@@ -1,11 +1,12 @@
 class Enemy {
-    constructor(x, y, speedX = 2, speedY = 2, size = 20) {
+    constructor(x, y, speedX = 2, speedY = 2, size = 20,score = 100) {
         this.positionX = x;
         this.positionY = y;
         this.speedX = speedX;
         this.speedY = speedY;
         this.size = size;
         this.existence = true; // 敵が存在しているかどうか
+        this.score = score; // 敵を倒したときに得られるスコア 種類によって変えるべきだが暫定的に100にしておく
     }
 
     moveEnemy() {
@@ -37,5 +38,9 @@ class Enemy {
             return true;
         }
         return false;
+    }
+
+    getEnemyScore() {
+        return this.score;
     }
 }
