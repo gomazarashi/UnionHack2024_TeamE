@@ -1,12 +1,15 @@
 class Enemy {
-    constructor(x, y, speedX = 2, speedY = 2, size = 20,score = 100) {
+    constructor(x, y, speedX = 2, speedY = 2, size = 20, score = 100, shootInterval = 100) {
         this.positionX = x;
         this.positionY = y;
         this.speedX = speedX;
         this.speedY = speedY;
         this.size = size;
-        this.existence = true; // 敵が存在しているかどうか
-        this.score = score; // 敵を倒したときに得られるスコア 種類によって変えるべきだが暫定的に100にしておく
+        this.existence = true;
+        this.score = score;
+        this.enemyBulletArray = [];
+        this.shootInterval = shootInterval;
+        this.currentCooldown = shootInterval;
     }
 
     moveEnemy() {
@@ -43,4 +46,26 @@ class Enemy {
     getEnemyScore() {
         return this.score;
     }
+
+    // 弾を発射するメソッド
+    shoot() {
+        if (this.currentCooldown <= 0) {
+            const bullet = new EnemyBullet(this.positionX + this.size / 2, this.positionY + this.size);
+            this.enemyBulletArray.push(bullet);
+            this.currentCooldown = this.shootInterval; // クールダウンをリセット
+        } else {
+            this.currentCooldown--; // クールダウンを減らす
+        }
+    }
+
+    // 弾を管理するメソッド
+    bulletControl(ctx) {
+        this.enemyBulletArray = this.enemyBulletArray.filter((bullet) => bullet.getExistence());
+        this.enemyBulletArray.forEach((bullet) => {
+            bullet.moveBullet();
+            bullet.drawBullet(ctx);
+        });
+    }
+
+    
 }
