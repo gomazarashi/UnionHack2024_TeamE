@@ -4,6 +4,7 @@ class enemyFrequency{
         this.interval = interval;
         this.counter = 5;
         this.gameView = gameView; // gameView インスタンスを保持
+        this.enemyData = []
     }
 
     management(){
@@ -23,7 +24,14 @@ class enemyFrequency{
         const y = Math.random()*100;
         const speedX = Math.random()*3;
         const speedY = Math.random()*3;
-        return new Enemy(x,y,speedX,speedY,20,100,100,this.gameView);
+        const num = Math.random()*3
+        if (num<1) {
+            return new Enemy(x,y,speedX,speedY,20,100,100,this.gameView)
+        }else if (num<2) {
+            return new enemyBlue(x,y,speedX,speedY,20,100,100,this.gameView)
+        }else{
+            return new enemyGreen(x,y,speedX,speedY,40,100,100,this.gameView);
+        }
     }
 
     moveAllEnemy(bulletArray, canvasStyle, ctx) {
