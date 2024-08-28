@@ -1,7 +1,3 @@
-/* 
-canvasや背景の見た目をいじるクラス。サイズ調整とか?基本cssの補助
-*/
-
 class CanvasStyle {
     constructor(canvas) {
         this.canvas = canvas;
@@ -20,6 +16,10 @@ class CanvasStyle {
 
         // スケーリング
         this.ctx.scale(this.dpr, this.dpr);
+
+        // スコアとライフの初期化　表示のために設定しているが、後ほどゲーム管理用のjsファイルに移動する
+        this.score = 0;
+        this.lives = 3;
     }
 
     drawBackground(color = '#111') {
@@ -27,11 +27,11 @@ class CanvasStyle {
         this.ctx.fillRect(0, 0, this.canvas.width / this.dpr, this.canvas.height / this.dpr);
     }
 
-    drawGameScreen(score, lives) {
+    drawGameScreen() {
         this.ctx.font = '20px Arial';
         this.ctx.fillStyle = 'white';
-        this.ctx.fillText(`SCORE: ${score}`, 10, 30); // スコアの表示
-        this.ctx.fillText(`LIFE: ${lives}`, (this.canvas.width / this.dpr) - 100, 30); // ライフの表示
+        this.ctx.fillText(`SCORE: ${this.score}`, 10, 30); // スコアの表示
+        this.ctx.fillText(`LIFE: ${this.lives}`, (this.canvas.width / this.dpr) - 100, 30); // ライフの表示
     }
 
     drawItemMenu(items) {
@@ -49,13 +49,41 @@ class CanvasStyle {
             this.ctx.fillText(item, menuX + 10, menuY + 25 + (index * 20));
         });
     }
+
+    // スコアを加算するメソッド
+    addScore(points) {
+        this.score += points;
+    }
+
+    // ライフを減らすメソッド
+    decreaseLife() {
+        this.lives -= 1;
+    }
+
+    // スコアをリセットするメソッド
+    resetScore() {
+        this.score = 0;
+    }
+
+    // ライフをリセットするメソッド
+    resetLives() {
+        this.lives = 3;
+    }
+
+    // スコアとライフを取得するメソッド
+    getScoreAndLives() {
+        return {
+            score: this.score,
+            lives: this.lives,
+        };
+    }
 }
 
 /* 
 // インスタンスの生成と画面表示
 const canvasStyle = new CanvasStyle(canvas);
 canvasStyle.drawBackground(); // 背景の描画
-canvasStyle.drawGameScreen(0, 3); // スコアとライフの表示
+canvasStyle.drawGameScreen(); // スコアとライフの表示
 
 // アイテムメニューの表示
 const items = ['Item 1', 'Item 2', 'Item 3'];
