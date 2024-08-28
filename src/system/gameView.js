@@ -23,8 +23,15 @@ class gameView {
         this.player.drawPlayer(this.ctx);
         this.player.bulletControl(this.ctx);
 
-        this.enemy.moveEnemy();
-        this.enemy.drawEnemy(this.ctx);
+        if (this.enemy.existence) {
+            this.player.bulletArray.forEach((bullet) => {
+                if (this.enemy.checkCollision(bullet)) {
+                    console.log('Enemy hit!');
+                }
+            });
+            this.enemy.moveEnemy();
+            this.enemy.drawEnemy(this.ctx);
+        }
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
