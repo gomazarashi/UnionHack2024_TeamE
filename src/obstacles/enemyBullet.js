@@ -41,4 +41,12 @@ class EnemyBullet {
     getExistence(){
         return this.existence;
     }
+
+    checkCollisionWithPlayer(player) {
+        const dx = this.positionX - player.positionX;
+        const dy = this.positionY - player.positionY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        return distance < (this.size + 10); // プレイヤーのサイズに合わせた当たり判定
+    }
 }

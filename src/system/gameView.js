@@ -21,7 +21,25 @@ class gameView {
 
         this.player.movePlayer();
         this.player.drawPlayer(this.ctx);
+        // プレイヤーの弾の管理
         this.player.bulletControl(this.ctx);
+
+        // 敵の弾とプレイヤーの衝突判定
+        this.enemyManager.enemyList.forEach(enemy => {
+            if (enemy && enemy.existence) {
+                enemy.shoot(); // 敵の弾を撃つ
+                enemy.bulletControl(this.ctx); // 敵の弾を描画
+
+                // 敵の弾とプレイヤーの衝突判定
+                enemy.enemyBulletArray.forEach(enemyBullet => {
+                    if (enemyBullet.getExistence() && enemyBullet.checkCollisionWithPlayer(this.player)) {
+                        this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                        enemyBullet.existence = false; // 敵の弾を消す これを消すと1度あたった弾に何度もあたる
+                        console.log('Player hit by enemy bullet!');
+                    }
+                });
+            }
+        });
 
         this.enemyManager.management()
         this.enemyManager.moveAllEnemy(this.player.bulletArray,this.canvasStyle,this.ctx);
