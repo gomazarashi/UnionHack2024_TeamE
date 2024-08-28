@@ -1,5 +1,5 @@
 class EnemyBullet {
-    cconstructor(x, y) {
+    constructor(x, y) {
         this.vectorX = 0;
         this.vectorY = 4;
         this.positionX = x;
