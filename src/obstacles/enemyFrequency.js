@@ -1,8 +1,9 @@
 class enemyFrequency{
-    constructor(interval = 120){
+    constructor(interval = 120, gameView){
         this.enemyList = new Array(10).fill(null);
         this.interval = interval;
         this.counter = 5;
+        this.gameView = gameView; // gameView インスタンスを保持
     }
 
     management(){
@@ -22,7 +23,7 @@ class enemyFrequency{
         const y = Math.random()*100;
         const speedX = Math.random()*3;
         const speedY = Math.random()*3;
-        return new Enemy(x,y,speedX,speedY,20,100);
+        return new Enemy(x,y,speedX,speedY,20,100,100,this.gameView);
     }
 
     moveAllEnemy(bulletArray, canvasStyle, ctx) {
