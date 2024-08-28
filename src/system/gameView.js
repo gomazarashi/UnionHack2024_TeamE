@@ -6,7 +6,7 @@ class gameView {
         this.canvasStyle = new CanvasStyle(canvas, ctx);
         this.flag = false;
 
-        this.enemy = new Enemy(10, 10);
+        this.enemyManager = new enemyFrequency();
     }
 
     update() {
@@ -23,16 +23,8 @@ class gameView {
         this.player.drawPlayer(this.ctx);
         this.player.bulletControl(this.ctx);
 
-        if (this.enemy.existence) {
-            this.player.bulletArray.forEach((bullet) => {
-                if (this.enemy.checkCollision(bullet)) {
-                    console.log('Enemy hit!');
-                    this.canvasStyle.addScore(this.enemy.getEnemyScore()); // スコアを加算
-                }
-            });
-            this.enemy.moveEnemy();
-            this.enemy.drawEnemy(this.ctx);
-        }
+        this.enemyManager.management()
+        this.enemyManager.moveAllEnemy(this.player.bulletArray,this.canvasStyle,this.ctx);
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
