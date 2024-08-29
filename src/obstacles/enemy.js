@@ -1,5 +1,5 @@
 class Enemy {
-    constructor(x, y, speedX = 2, speedY = 2, size = 20, score = 100, shootInterval = 100,gameView) {
+    constructor(x, y, speedX = 2, speedY = 2, size = 20, score = 100, shootInterval = 100, gameView) {
         this.positionX = x;
         this.positionY = y;
         this.speedX = speedX;
@@ -40,6 +40,12 @@ class Enemy {
         if (distance < this.size / 2 + bullet.size) {
             this.existence = false; // 敵が倒された
             bullet.existence = false; // 弾が消える
+
+            // アイテムを落とす処理
+            if (Math.random() <= 0.6) { // 60%の確率でアイテムを落とす
+                const itemType = "playerSpeedUp" // プレイヤーの移動速度を加速 後ほど追加
+                this.dropItem(this.positionX, this.positionY, itemType);
+            }
             return true;
         }
         return false;
@@ -58,5 +64,11 @@ class Enemy {
         } else {
             this.currentCooldown--; // クールダウンを減らす
         }
+    }
+
+    // アイテムを落とすメソッド
+    dropItem(x, y, type) {
+        const newItem = new Item(x, y, type);
+        this.gameView.addItem(newItem); // gameView インスタンスにアイテムを追加
     }
 }

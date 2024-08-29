@@ -13,6 +13,9 @@ class gameView {
 
         // BGMを管理するインスタンスを生成
         this.audioManager = new AudioManager();
+
+        // アイテムを管理する配列
+        this.items = [];
     }
 
     update() {
@@ -38,6 +41,9 @@ class gameView {
                 enemy.shoot(this.player); // 弾を発射させる
             }
         });
+
+        // アイテムの管理
+        this.manageItems();
 
 
         if (this.flag) {
@@ -74,5 +80,30 @@ class gameView {
     gameStop() {
         this.flag = false;
         this.audioManager.stopBGM(); // ゲーム停止時にBGMを停止
+    }
+
+    addItem(item) {
+        this.items.push(item); // 新しいアイテムを追加
+    }
+
+    manageItems() {
+        // アイテムの描画と衝突処理
+        this.items = this.items.filter((item) => item.existence); // 存在するアイテムだけを残す
+        this.items.forEach((item) => {
+            item.moveItem();
+            item.drawItem(this.ctx);
+            if (item.checkCollision(this.player)) {
+                console.log('Item collected!');
+                this.applyItemEffect(item.type);
+                item.existence = false; // アイテムを消す
+                
+            }
+        });
+    }
+
+    applyItemEffect(type) {
+        if (type === "playerSpeedUp") {
+            this.player.speedUp(); // プレイヤーの移動速度を上げる
+        }
     }
 }

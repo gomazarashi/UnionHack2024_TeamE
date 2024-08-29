@@ -3,7 +3,7 @@ class playerControl {
         this.speed = 3;
         this.positionX = 320;
         this.positionY = 400;
-        
+
         this.controler = {
             a: false,
             s: false,
@@ -48,7 +48,7 @@ class playerControl {
 
         if (this.controler.Space) {
             this.addBullet();
-            this.controler.Space=false;
+            this.controler.Space = false;
         }
 
         //画面端の指定
@@ -66,13 +66,13 @@ class playerControl {
         }
     }
 
-    addBullet(){
-        this.bulletArray.push(new playerBullet(this.positionX,this.positionY));
+    addBullet() {
+        this.bulletArray.push(new playerBullet(this.positionX, this.positionY));
     }
 
-    bulletControl(ctx){
-        this.bulletArray = this.bulletArray.filter(bullet=>bullet.getExistence());
-        this.bulletArray.forEach(bullet=>{
+    bulletControl(ctx) {
+        this.bulletArray = this.bulletArray.filter(bullet => bullet.getExistence());
+        this.bulletArray.forEach(bullet => {
             bullet.moveBullet();
             bullet.drawBullet(ctx);
         })
@@ -118,4 +118,10 @@ class playerControl {
                 break;
         }
     }
+
+    speedUp() {
+        this.speed += 1; // 速度を1上げる
+        console.log('Player speed up!');
+    }
+
 }
