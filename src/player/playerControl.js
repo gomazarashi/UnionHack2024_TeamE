@@ -15,17 +15,15 @@ class playerControl {
         window.addEventListener("keyup", this.handleKeyRelease.bind(this));
 
         this.bulletArray = new Array();
-        this.bulletType = 'single'; // 弾の種類を管理するプロパティ
     }
 
     drawPlayer(ctx) {
         ctx.strokeStyle = "white";
         ctx.strokeRect(this.positionX - 15, this.positionY - 10, 30, 20);
-        ctx.strokeRect(this.positionX - 5, this.positionY - 20, 10, 10);
+        ctx.strokeRect(this.positionX - 5, this.positionY - 20, 10, 10)
     }
 
     movePlayer() {
-        // プレイヤーの移動処理
         if (this.controler.w && this.controler.a) {
             this.positionY -= (this.speed / Math.sqrt(2));
             this.positionX -= (this.speed / Math.sqrt(2));
@@ -53,7 +51,7 @@ class playerControl {
             this.controler.Space = false;
         }
 
-        // 画面端の指定
+        //画面端の指定
         if (this.positionX < 0) {
             this.positionX = 0;
         }
@@ -69,15 +67,7 @@ class playerControl {
     }
 
     addBullet() {
-        if (this.bulletType === 'single') {
-            // 単方向の弾を発射
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY));
-        } else if (this.bulletType === 'triple') {
-            // 3方向の弾を発射
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, 0, -5));  // 真上
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
-        }
+        this.bulletArray.push(new playerBullet(this.positionX, this.positionY));
     }
 
     bulletControl(ctx) {
@@ -85,7 +75,7 @@ class playerControl {
         this.bulletArray.forEach(bullet => {
             bullet.moveBullet();
             bullet.drawBullet(ctx);
-        });
+        })
     }
 
     handleKeyPress(event) {
@@ -124,7 +114,7 @@ class playerControl {
                 this.controler.w = false;
                 break;
             case " ":
-                this.controler.Space = false;
+                this.controler.Space = true;
                 break;
         }
     }
@@ -136,8 +126,4 @@ class playerControl {
         }
     }
 
-    // アイテムを取得したときに弾の種類を変更する
-    changeBulletType(type) {
-        this.bulletType = type;
-    }
 }
