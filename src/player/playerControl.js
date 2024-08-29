@@ -120,8 +120,8 @@ class playerControl {
     }
 
     speedUp() {
-        maxSpeed = 6;
-        if (this.speed <= maxSpeed) {
+        this.maxSpeed = 6;
+        if (this.speed <= this.maxSpeed) {
             this.speed += 1;
         }
     }
