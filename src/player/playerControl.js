@@ -15,6 +15,7 @@ class playerControl {
         window.addEventListener("keyup", this.handleKeyRelease.bind(this));
 
         this.bulletArray = new Array();
+        this.bulletType = 'single'; // 弾の種類を管理するプロパティ
     }
 
     drawPlayer(ctx) {
@@ -67,7 +68,15 @@ class playerControl {
     }
 
     addBullet() {
-        this.bulletArray.push(new playerBullet(this.positionX, this.positionY));
+        if (this.bulletType === 'single') {
+            // 単方向の弾を発射
+            this.bulletArray.push(new playerBullet(this.positionX, this.positionY));
+        } else if (this.bulletType === 'triple') {
+            // 3方向の弾を発射
+            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
+            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, 0, -5));  // 真上
+            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
+        }
     }
 
     bulletControl(ctx) {
@@ -119,11 +128,17 @@ class playerControl {
         }
     }
 
+    // プレイヤーのスピードを上げる
     speedUp() {
         this.maxSpeed = 6;
         if (this.speed <= this.maxSpeed) {
             this.speed += 1;
         }
+    }
+
+    // アイテムを取得したときに弾の種類を変更する
+    changeBulletType(type) {
+        this.bulletType = type;
     }
 
 }
