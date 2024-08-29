@@ -21,10 +21,6 @@ class gameView {
         this.canvasStyle.drawBackground(); // 背景の描画
         this.canvasStyle.drawGameScreen(0, 3); // スコアとライフの表示
 
-        // アイテムメニューの表示
-        const items = ['Item 1', 'Item 2', 'Item 3'];
-        this.canvasStyle.drawItemMenu(items);
-
         this.player.movePlayer();
         this.player.drawPlayer(this.ctx);
         // プレイヤーの弾の管理
