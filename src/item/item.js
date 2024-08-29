@@ -3,7 +3,7 @@ class Item {
         this.x = x;
         this.y = y;
         this.type = type; // アイテムの種類 
-        this.size = 15; // アイテムのサイズ
+        this.size = 10; // アイテムのサイズ
         this.existence = true;
     }
 
