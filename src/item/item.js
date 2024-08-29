@@ -3,19 +3,23 @@ class Item {
         this.x = x;
         this.y = y;
         this.type = type; // アイテムの種類 
-        this.size = 15; // アイテムのサイズ
+        this.size = 10; // アイテムのサイズ
         this.existence = true;
     }
 
     moveItem() {
         // アイテムを下に移動させる
-        this.y += 2; 
+        this.y += 2;
         // 画面外に出たら消す
         if (this.y > 480) this.existence = false;
     }
 
     drawItem(ctx) {
-        ctx.fillStyle = 'rgb(255 165 0)'; // オレンジ色
+        if (this.type === 'speedUp') {
+            ctx.fillStyle = 'rgb(255, 165, 0)'; // オレンジ色
+        } else if (this.type === 'changeBulletType') {
+            ctx.fillStyle = 'rgb(0, 0, 255)'; // 青色
+        }
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
