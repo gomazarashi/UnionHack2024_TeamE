@@ -39,7 +39,7 @@ class gameView {
         // すべての敵が弾を発射する
         this.enemyManager.enemyList.forEach(enemy => {
             if (enemy && enemy.existence) {
-                enemy.shoot(); // 弾を発射させる
+                enemy.shoot(this.player); // 弾を発射させる
             }
         });
 
