@@ -16,7 +16,7 @@ class mainView{
 
         this.situation = 'home';
 
-        this.gameview = new gameView(this.canvas,this.ctx);
+        this.gameview = new gameView(this.canvas,this.ctx,this);
 
         this.result = document.getElementById('result');
         this.result.style.display = 'none';
@@ -69,7 +69,7 @@ class mainView{
     handleEscapeKey(event){
         console.log('test');
         if (event.key==='Escape') {
-            this.switchView('result');
+            this.switchView('home');
         }
     }
 }
