@@ -69,7 +69,4 @@ const canvasStyle = new CanvasStyle(canvas);
 canvasStyle.drawBackground(); // 背景の描画
 canvasStyle.drawGameScreen(); // スコアとライフの表示
 
-// アイテムメニューの表示
-const items = ['Item 1', 'Item 2', 'Item 3'];
-canvasStyle.drawItemMenu(items);
 */
