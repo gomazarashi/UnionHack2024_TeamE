@@ -43,7 +43,7 @@ class Enemy {
 
             // アイテムを落とす処理
             if (Math.random() <= 0.6) { // 60%の確率でアイテムを落とす
-                const itemType = "playerSpeedUp" // プレイヤーの移動速度を加速 後ほど追加
+                const itemType = Math.random() <= 0.5 ? 'speedUp' : 'changeBulletType';
                 this.dropItem(this.positionX, this.positionY, itemType);
             }
             return true;
