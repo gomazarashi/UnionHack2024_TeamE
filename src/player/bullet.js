@@ -1,7 +1,7 @@
 class playerBullet{
-    constructor(x,y){
-        this.vectorX = 0;
-        this.vectorY = -4;
+    constructor(x,y,vectorX=0,vectorY=-4){
+        this.vectorX = vectorX;
+        this.vectorY = vectorY;
         this.positionX = x;
         this.positionY = y;
         this.size = 10;
