@@ -120,8 +120,10 @@ class playerControl {
     }
 
     speedUp() {
-        this.speed += 1; // 速度を1上げる
-        console.log('Player speed up!');
+        maxSpeed = 6;
+        if (this.speed <= maxSpeed) {
+            this.speed += 1;
+        }
     }
 
 }
