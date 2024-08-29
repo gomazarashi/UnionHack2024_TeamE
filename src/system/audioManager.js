@@ -1,7 +1,7 @@
 class AudioManager {
     constructor() {
         // BGMの設定
-        this.bgm = new Audio('../../resources/sound/maou_bgm_cyber43.mp3');
+        this.bgm = new Audio('./resources/sound/maou_bgm_cyber43.mp3');
         this.bgm.loop = true; // ループ再生を有効にする
         this.bgm.volume = 0.2; // 音量を設定（0.0から1.0の範囲）
 
