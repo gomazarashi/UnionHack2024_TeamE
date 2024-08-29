@@ -34,22 +34,6 @@ class CanvasStyle {
         this.ctx.fillText(`LIFE: ${this.lives}`, (this.canvas.width / this.dpr) - 100, 30); // ライフの表示
     }
 
-    drawItemMenu(items) {
-        const menuWidth = 150;
-        const menuHeight = 100;
-        const menuX = 10;
-        const menuY = (this.canvas.height / this.dpr) - menuHeight - 10;
-
-        this.ctx.fillStyle = 'rgba(50, 50, 50, 0.8)';
-        this.ctx.fillRect(menuX, menuY, menuWidth, menuHeight);
-
-        this.ctx.font = '16px Arial';
-        this.ctx.fillStyle = 'white';
-        items.forEach((item, index) => {
-            this.ctx.fillText(item, menuX + 10, menuY + 25 + (index * 20));
-        });
-    }
-
     // スコアを加算するメソッド
     addScore(points) {
         this.score += points;
