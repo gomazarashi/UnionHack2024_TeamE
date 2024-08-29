@@ -25,4 +25,36 @@ class enemyBlue extends Enemy{
             this.speedY = this.speedY/2
         }
     }
+
+    shoot() {
+        if (this.currentCooldown <= 0) {
+            this.shoot3()
+        } else {
+            this.currentCooldown--; // クールダウンを減らす
+        }
+    }
+
+    shoot3() {
+        const bullet1 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size,-2,2);
+        this.gameView.addEnemyBullet(bullet1);
+        const bullet2 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size,0,3);
+        this.gameView.addEnemyBullet(bullet2);
+        const bullet3 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size,2,2);
+        this.gameView.addEnemyBullet(bullet3);
+        this.currentCooldown = this.shootInterval; // クールダウンをリセット
+    }
+
+    checkCollision(bullet) {
+        const dx = this.positionX + this.size / 2 - bullet.positionX;
+        const dy = this.positionY + this.size / 2 - bullet.positionY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        if (distance < this.size / 2 + bullet.size) {
+            this.shoot3();
+            this.existence = false; // 敵が倒された
+            bullet.existence = false; // 弾が消える
+            return true;
+        }
+        return false;
+    }
 }
