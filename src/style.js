@@ -61,6 +61,10 @@ class CanvasStyle {
             lives: this.lives,
         };
     }
+
+    setResultScore() {
+        document.getElementById('score').innerText = this.score.toString();
+    }
 }
 
 /* 

@@ -16,7 +16,10 @@ class mainView{
 
         this.situation = 'home';
 
-        this.gameview = new gameView(this.canvas,this.ctx);
+        this.gameview = new gameView(this.canvas,this.ctx,this);
+
+        this.result = document.getElementById('result');
+        this.result.style.display = 'none';
 
     }
 
@@ -34,7 +37,10 @@ class mainView{
             case 'game':
                 this.canvas.style.display = 'none'
                 this.gameview.gameStop();
-                break;        
+                break;       
+            case 'result':
+                this.result.style.display = 'none';
+                break; 
             default:
                 break;
         }
@@ -46,6 +52,8 @@ class mainView{
                 this.canvas.style.display = 'flex'
                 this.gameview.gameStart()
                 break;
+            case 'result':
+                this.result.style.display = 'inline'
             default:
                 break;
         }

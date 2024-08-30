@@ -5,6 +5,7 @@
     <title>避けゲー(仮)</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/home.css">
+    <link rel="stylesheet" href="style/result.css">
 </head>
 
 <body>
@@ -15,6 +16,22 @@
         <button id="start">start</button>
         <button id="option">option</button>
     </div>
+    <div id="result">
+        <div class="score-label">Score</div>
+        <div class="score-value" id="score">00000</div>
+        <div class="invisible-point"></div>
+        <img class="image1" src="./resources/img/—Pngtree—green plant green leaf wreath_4473411.png" />
+        <img class="image2" src="./resources/img/—Pngtree—blue fire ring abstract circular_7269313.png" />
+        <img class="image3" src="./resources/img/—Pngtree—fire circle image_9250764.png" />
+        <button class="back-button" onclick="view.switchView('home')">
+            <div class="button-text">back home</div>
+        </button>
+        <!-- <div class="high-score-label">hi score</div>
+        <div class="high-score-value">000000</div> -->
+        <div class="circle-small"></div>
+        <div class="circle-large"></div>
+    </div>
+    
     <script src="src/player/bullet.js"></script>
     <script src="src/player/playerControl.js"></script>
     <script src="src/style.js"></script>
@@ -31,5 +48,4 @@
     <script src="src/system/audioManager.js"></script>
     <script src="src/main.js"></script>
 </body>
-
 </html>

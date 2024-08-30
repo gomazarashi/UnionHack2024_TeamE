@@ -1,6 +1,8 @@
 class gameView {
-    constructor(canvas, ctx) {
+    constructor(canvas, ctx, mainview) {
         this.ctx = ctx;
+
+        this.mainview = mainview;
 
         this.player = new playerControl()
         this.canvasStyle = new CanvasStyle(canvas, ctx);
@@ -24,6 +26,10 @@ class gameView {
         this.canvasStyle.drawBackground(); // 背景の描画
         this.canvasStyle.drawGameScreen(0, 3); // スコアとライフの表示
 
+        if (this.canvasStyle.lives<=0) {
+            this.GameOver();
+        }
+
         this.player.movePlayer();
         this.player.drawPlayer(this.ctx);
         // プレイヤーの弾の管理
@@ -44,7 +50,6 @@ class gameView {
 
         // アイテムの管理
         this.manageItems();
-
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
@@ -107,5 +112,10 @@ class gameView {
         } else if (type === 'changeBulletType') {
             this.player.changeBulletType('triple'); // プレイヤーの弾の種類を3方向に変更
         }
+    }
+
+    GameOver(){
+        this.canvasStyle.setResultScore();
+        this.mainview.switchView('result');
     }
 }
