@@ -116,6 +116,13 @@ class gameView {
 
     GameOver(){
         this.canvasStyle.setResultScore();
+        this.canvasStyle.resetLives();
+        this.canvasStyle.resetScore();
+        this.player = new playerControl()
+        this.flag = false;
+        this.enemyManager = new enemyFrequency(120, this);
+        // 敵の弾を管理する配列
+        this.enemyBullets = [];
         this.mainview.switchView('result');
     }
 }
