@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/home.css">
     <link rel="stylesheet" href="style/result.css">
+    <link rel="stylesheet" href="style/option.css">
 </head>
 
 <body>
@@ -14,7 +15,7 @@
     <div id="home">
         <h1>Title</h1>
         <button id="start">start</button>
-        <button id="option">option</button>
+        <button id="optionButtom">option</button>
     </div>
     <div id="result">
         <div class="score-label">Score</div>
@@ -31,7 +32,17 @@
         <div class="circle-small"></div>
         <div class="circle-large"></div>
     </div>
-    
+    <div id="option">
+        <div>
+            <img src="./resources/img/ボリュームOFFアイコン.png" alt="n">
+            <input type="range" name="volume" id="volume" oninput="view.setVolume(this.value)">
+            <img src="./resources/img/ボリュームアイコン　3.png" alt="n">
+            
+        </div>
+        <button class="back-button" onclick="view.switchView('home')">
+            <div class="button-text">back home</div>
+        </button>
+    </div>
     <script src="src/player/bullet.js"></script>
     <script src="src/player/playerControl.js"></script>
     <script src="src/style.js"></script>

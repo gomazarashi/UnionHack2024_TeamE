@@ -1,0 +1,38 @@
+#option{
+    background-color: black;
+    width: 640px;
+    height: 480px;
+    display: none;
+    justify-items: center;
+}
+#option div{
+    align-items: center;
+    display: flex;
+}
+
+#option div img{
+    width: 30px;
+    height: 30px;
+}
+
+/* inputの後ろのバーを白くするスタイル */
+#volume {
+    appearance: none;
+    width: 300px;
+    height: 5px;
+    background: white;
+}
+
+#option button{
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-left: 27px;
+    padding-right: 26px;
+    left: 10px;
+    top: 10px;
+    position: relative;
+    border: 1px white solid;
+    align-items: center;
+    background: none;
+    height: 50px;
+}
