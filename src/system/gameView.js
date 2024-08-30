@@ -1,5 +1,5 @@
 class gameView {
-    constructor(canvas, ctx, mainview) {
+    constructor(canvas, ctx, mainview, audioManager) {
         this.ctx = ctx;
 
         this.mainview = mainview;
@@ -14,7 +14,7 @@ class gameView {
         this.enemyBullets = [];
 
         // BGMを管理するインスタンスを生成
-        this.audioManager = new AudioManager();
+        this.audioManager = audioManager;
 
         // アイテムを管理する配列
         this.items = [];
