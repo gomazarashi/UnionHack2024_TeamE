@@ -78,7 +78,6 @@ class mainView{
     }
 
     handleEscapeKey(event){
-        console.log('test');
         if (event.key==='Escape') {
             this.switchView('home');
         }

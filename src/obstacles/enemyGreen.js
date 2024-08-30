@@ -42,7 +42,6 @@ class enemyGreen extends Enemy{
                     const bullet = new EnemyGreenBullet(this.positionX + this.size / 2,this.positionY + this.size,player);
                     this.gameView.addEnemyBullet(bullet);
                     this.currentCooldown = this.shootInterval; // クールダウンをリセット
-                    console.log([dx / distance, dy / distance, dx, dy, distance]);
                 }
             } else {
                 this.currentCooldown--; // クールダウンを減らす

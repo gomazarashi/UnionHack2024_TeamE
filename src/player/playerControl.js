@@ -88,7 +88,6 @@ class playerControl {
     }
 
     handleKeyPress(event) {
-        console.log(event.key);
         switch (event.key) {
             case "a":
                 this.controler.a = true;

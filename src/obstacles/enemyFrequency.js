@@ -39,7 +39,6 @@ class enemyFrequency{
             if (enemy && enemy.existence) {
                 bulletArray.forEach((bullet) => {
                     if (enemy.checkCollision(bullet)) {
-                        console.log('Enemy hit!');
                         canvasStyle.addScore(enemy.getEnemyScore()); // スコアを加算
                     }
                 });

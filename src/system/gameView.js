@@ -116,7 +116,6 @@ class gameView {
                 if (this.boss.checkCollisionWithBullet(bullet)) {
                     this.boss.takeDamage(1); // 弾が当たったらダメージを受ける
                     bullet.existence = false; // 弾を消す
-                    console.log("ボスにヒット");
                     if (!this.boss.getExistence()) {
                         this.canvasStyle.addScore(10000); // ボスを倒したらスコアを加算
                     }
@@ -140,7 +139,6 @@ class gameView {
             if (bullet.checkCollisionWithPlayer(this.player)) {
                 this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
                 bullet.existence = false; // 弾を消す
-                console.log('Player hit by enemy bullet!');
             }
         });
     }
@@ -171,7 +169,6 @@ class gameView {
             item.moveItem();
             item.drawItem(this.ctx);
             if (item.checkCollision(this.player)) {
-                console.log('Item collected!');
                 this.applyItemEffect(item.type);
                 item.existence = false; // アイテムを消す
 
@@ -190,7 +187,6 @@ class gameView {
     // ボスの出現判定を行うメソッド
     checkForBossSpawn() {
         this.score = this.canvasStyle.getScoreAndLives().score;
-        console.log(this.score);
         if ((this.score >= 500) && (this.bossSpawned === false)) { // スコアが一定値を超えたらボスを出現させる
             this.spawnBoss();
         }
