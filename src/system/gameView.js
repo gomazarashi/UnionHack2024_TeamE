@@ -21,6 +21,12 @@ class gameView {
 
         // ボスが出現したかどうか
         this.bossSpawned = false;
+
+        // ボスのインスタンス
+        this.boss = new BossCharacter();
+
+        // ボスの弾を管理する配列
+        this.bossBullets = [];
     }
 
     update() {
@@ -56,6 +62,25 @@ class gameView {
 
         // ボスの出現をチェック
         this.checkForBossSpawn();
+
+        if (this.boss && this.boss.getExistence()) {
+            this.boss.moveBoss();
+            this.boss.drawBoss(this.ctx);
+            this.boss.moveBullets();
+
+            // ボスの弾とプレイヤーの衝突判定
+            this.boss.bullets = this.boss.bullets.filter(bullet => bullet.getExistence());
+            this.boss.bullets.forEach(bullet => {
+                if (bullet.checkCollisionWithPlayer(this.player)) {
+                    this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                    bullet.existence = false; // 弾を消す
+                }
+            });
+
+            if (this.boss.checkCollisionWithPlayer(this.player)) {
+                this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+            }
+        }
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
@@ -124,19 +149,17 @@ class gameView {
     checkForBossSpawn() {
         this.score=this.canvasStyle.getScoreAndLives().score;
         console.log(this.score);
-        if ((this.score >= 2000) && (this.bossSpawned === false)) { // スコアが一定値を超えたらボスを出現させる
+        if ((this.score >= 500) && (this.bossSpawned === false)) { // スコアが一定値を超えたらボスを出現させる
             this.spawnBoss();
         }
     }
 
     // ボスを出現させるメソッド
     spawnBoss() {
-        // キャンバスからすべての敵を消す
-        this.enemyManager.enemyList = [];
-        this.enemyManager.counter = 0;
         // ボスキャラをインスタンス化
-        this.boss = new BossCharacter();
         this.bossSpawned = true;
+        this.boss = new BossCharacter();
+        this.boss.existence = true;
         //ボスを敵リストに追加
         this.enemyManager.enemyList.push(this.boss);
     }
