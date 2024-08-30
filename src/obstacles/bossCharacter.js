@@ -1,5 +1,5 @@
 class BossCharacter {
-    constructor() {
+    constructor(ctx) {
         this.positionX = 320; // ボスの初期X位置
         this.positionY = 50;  // ボスの初期Y位置
         this.width = 80;      // ボスの幅
@@ -8,6 +8,10 @@ class BossCharacter {
         this.hp = 20;        // ボスの体力
         this.existence = false; // ボスの存在フラグ
         this.bullets = [];    // ボスが発射する弾の配列
+        this.ctx = ctx;
+
+        this.shootInterval = 100; // 発射間隔
+        this.currentCooldown = 0; // クールダウンタイマー
     }
 
     drawBoss(ctx) {
@@ -26,7 +30,7 @@ class BossCharacter {
             ctx.lineTo(this.positionX, this.positionY + this.height / 2);
             ctx.closePath();
             ctx.fill();
-            
+
         }
     }
 
@@ -40,10 +44,20 @@ class BossCharacter {
         }
     }
 
-    attack() {
+    shoot() {
         if (this.existence) {
-            // ボスの攻撃
-            this.bullets.push(new BossBullet(this.positionX, this.positionY, 0, 5));
+            // 発射クールダウンの管理
+            if (this.currentCooldown <= 0) {
+                this.currentCooldown = this.shootInterval; // クールダウンをリセット
+
+                // 弾を10発発射（垂直方向に一列）
+                for (let i = 0; i < 10; i++) {
+                    const offsetY = i * 10; // 弾の垂直位置を調整
+                    this.bullets.push(new BossBullet(this.positionX, this.positionY + offsetY, 0, 5)); // すべて下向きに発射
+                }
+            } else {
+                this.currentCooldown--; // クールダウンを減らす
+            }
         }
     }
 
@@ -52,7 +66,7 @@ class BossCharacter {
         this.bullets = this.bullets.filter(bullet => bullet.getExistence());
         this.bullets.forEach(bullet => {
             bullet.moveBullet();
-            bullet.drawBullet(ctx);
+            bullet.drawBullet(this.ctx);
         });
     }
 
@@ -66,6 +80,17 @@ class BossCharacter {
             return distance < (this.width / 2 + 15); // プレイヤーの幅は15と仮定
         }
         return false;
+    }
+
+    checkCollisionWithBullet(bullet) {
+        // ボスとプレイヤーの弾の衝突判定
+        if (this.existence) {
+            let dx = this.positionX - bullet.positionX;
+            let dy = this.positionY - bullet.positionY;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+
+            return distance < (this.width / 2 + bullet.size);
+        }
     }
 
     takeDamage(damage) {
@@ -106,6 +131,14 @@ class BossBullet {
             ctx.arc(this.positionX, this.positionY, this.size, 0, 2 * Math.PI);
             ctx.fill();
         }
+    }
+
+    checkCollisionWithPlayer(player) {
+        const dx = this.positionX - player.positionX;
+        const dy = this.positionY - player.positionY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+
+        return distance < (this.size + 10); // プレイヤーのサイズに合わせた当たり判定
     }
 
     getExistence() {

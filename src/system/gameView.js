@@ -22,11 +22,10 @@ class gameView {
         // ボスが出現したかどうか
         this.bossSpawned = false;
 
-        // ボスのインスタンス
-        this.boss = new BossCharacter();
-
         // ボスの弾を管理する配列
         this.bossBullets = [];
+
+        this.boss = new BossCharacter(this.ctx);
     }
 
     update() {
@@ -63,6 +62,11 @@ class gameView {
         // ボスの出現をチェック
         this.checkForBossSpawn();
 
+        // ボスの存在確認と弾の発射
+        if (this.boss && this.boss.existence) {
+            this.boss.shoot(); // ボスの弾を発射
+        }
+
         if (this.boss && this.boss.getExistence()) {
             this.boss.moveBoss();
             this.boss.drawBoss(this.ctx);
@@ -81,6 +85,22 @@ class gameView {
                 this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
             }
         }
+
+        // プレイヤーの弾とボスの衝突判定
+        this.player.bulletArray.forEach(bullet => {
+            if (bullet.getExistence() && this.boss.getExistence()) {
+                if (this.boss.checkCollisionWithBullet(bullet)) {
+                    this.boss.takeDamage(1); // 弾が当たったらダメージを受ける
+                    bullet.existence = false; // 弾を消す
+                    console.log("ボスにヒット");
+                    if (!this.boss.getExistence()) {
+                        this.canvasStyle.addScore(10000); // ボスを倒したらスコアを加算
+                        // ボスを倒したらゲームクリア
+                        this.GameOver();
+                    }
+                }
+            }
+        });
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
@@ -147,7 +167,7 @@ class gameView {
 
     // ボスの出現判定を行うメソッド
     checkForBossSpawn() {
-        this.score=this.canvasStyle.getScoreAndLives().score;
+        this.score = this.canvasStyle.getScoreAndLives().score;
         console.log(this.score);
         if ((this.score >= 500) && (this.bossSpawned === false)) { // スコアが一定値を超えたらボスを出現させる
             this.spawnBoss();
@@ -158,10 +178,8 @@ class gameView {
     spawnBoss() {
         // ボスキャラをインスタンス化
         this.bossSpawned = true;
-        this.boss = new BossCharacter();
+
         this.boss.existence = true;
-        //ボスを敵リストに追加
-        this.enemyManager.enemyList.push(this.boss);
     }
 
     GameOver() {
@@ -174,5 +192,8 @@ class gameView {
         // 敵の弾を管理する配列
         this.enemyBullets = [];
         this.mainview.switchView('result');
+        // ボスに関する変数を初期化
+        this.bossSpawned = false;
+        this.bossBullets = [];
     }
 }
