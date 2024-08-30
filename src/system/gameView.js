@@ -95,8 +95,6 @@ class gameView {
                     console.log("ボスにヒット");
                     if (!this.boss.getExistence()) {
                         this.canvasStyle.addScore(10000); // ボスを倒したらスコアを加算
-                        // ボスを倒したらゲームクリア
-                        this.GameOver();
                     }
                 }
             }
