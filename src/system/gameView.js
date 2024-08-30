@@ -25,10 +25,10 @@ class gameView {
         // ボスの弾を管理する配列
         this.bossBullets = [];
 
-        this.boss = new BossCharacter(this.ctx);
+        this.boss = new BossCharacter(this.ctx, this);
 
         // ボス周辺の敵機を格納する配列
-        this.orbitingEnemies = []; 
+        this.orbitingEnemies = [];
     }
 
     update() {
@@ -75,7 +75,26 @@ class gameView {
             this.boss.updateOrbitingEnemies(); // ボス周辺の敵機を更新
             this.boss.drawBoss(this.ctx);
             this.boss.moveBullets();
-            
+
+            //ボスの周辺の敵機の弾の発射処理
+            this.boss.orbitingEnemies.forEach(enemy => {
+                if (enemy && enemy.existence) {
+                    enemy.shoot(); // 弾を発射させる
+                }
+            });
+
+            this.player.bulletArray.forEach(bullet => {
+                this.boss.orbitingEnemies.forEach(enemy => {
+                    if (enemy && enemy.existence) {
+                        if (enemy.checkCollision(bullet)) {
+                            console.log('Orbiting enemy hit!');
+                            // 敵機が倒れたら何か処理が必要ならここで行う
+                        }
+                    }
+                });
+            });
+
+
 
             // ボスの弾とプレイヤーの衝突判定
             this.boss.bullets = this.boss.bullets.filter(bullet => bullet.getExistence());
