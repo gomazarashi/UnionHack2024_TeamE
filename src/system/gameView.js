@@ -18,6 +18,9 @@ class gameView {
 
         // アイテムを管理する配列
         this.items = [];
+
+        // ボスが出現したかどうか
+        this.bossSpawned = false;
     }
 
     update() {
@@ -26,7 +29,7 @@ class gameView {
         this.canvasStyle.drawBackground(); // 背景の描画
         this.canvasStyle.drawGameScreen(0, 3); // スコアとライフの表示
 
-        if (this.canvasStyle.lives<=0) {
+        if (this.canvasStyle.lives <= 0) {
             this.GameOver();
         }
 
@@ -50,6 +53,9 @@ class gameView {
 
         // アイテムの管理
         this.manageItems();
+
+        // ボスの出現をチェック
+        this.checkForBossSpawn();
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
@@ -101,7 +107,7 @@ class gameView {
                 console.log('Item collected!');
                 this.applyItemEffect(item.type);
                 item.existence = false; // アイテムを消す
-                
+
             }
         });
     }
@@ -114,7 +120,28 @@ class gameView {
         }
     }
 
-    GameOver(){
+    // ボスの出現判定を行うメソッド
+    checkForBossSpawn() {
+        this.score=this.canvasStyle.getScoreAndLives().score;
+        console.log(this.score);
+        if ((this.score >= 2000) && (this.bossSpawned === false)) { // スコアが一定値を超えたらボスを出現させる
+            this.spawnBoss();
+        }
+    }
+
+    // ボスを出現させるメソッド
+    spawnBoss() {
+        // キャンバスからすべての敵を消す
+        this.enemyManager.enemyList = [];
+        this.enemyManager.counter = 0;
+        // ボスキャラをインスタンス化
+        this.boss = new BossCharacter();
+        this.bossSpawned = true;
+        //ボスを敵リストに追加
+        this.enemyManager.enemyList.push(this.boss);
+    }
+
+    GameOver() {
         this.canvasStyle.setResultScore();
         this.canvasStyle.resetLives();
         this.canvasStyle.resetScore();
