@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キラキラ背景</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            overflow: hidden;
+        }
+
+        .sparkles {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .sparkle {
+            transform: scale(0);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: white;
+            position: absolute;
+            animation-name: sparkleAnimation;
+            animation-duration: 3s;
+        }
+
+        @keyframes sparkleAnimation {
+            0%, 100% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles"></div>
+    <script>
+        const sparkles = document.querySelector('.sparkles');
+        
+        function addSparkle() {
+            const top = (Math.random() * 100) + '%';
+            const left = (Math.random() * 100) + '%';
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.top = top;
+            sparkle.style.left = left;
+            sparkles.appendChild(sparkle);
+            
+            // 一定時間後に再度キラキラを追加
+            setTimeout(addSparkle, Math.random() * 1000);
+            
+            // 3秒後にこのキラキラを削除
+            setTimeout(() => {
+                sparkle.remove();
+            }, Math.random()*3000);
+        }
+        
+        // 初期のキラキラを開始
+        for (let i = 0; i < 20; i++) {
+            addSparkle();
+        }
+    </script>
+</body>
+</html>

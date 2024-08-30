@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <header></header>
+    <div class="sparkles"></div>
     <canvas id="canvas" width="640" height="480"></canvas>
     <div id="home">
         <h1>Title</h1>
@@ -27,8 +27,6 @@
         <button class="back-button" onclick="view.switchView('home')">
             <div class="button-text">back home</div>
         </button>
-        <!-- <div class="high-score-label">hi score</div>
-        <div class="high-score-value">000000</div> -->
         <div class="circle-small"></div>
         <div class="circle-large"></div>
     </div>
@@ -38,9 +36,7 @@
             <input type="range" name="volume" id="volume" oninput="view.setVolume(this.value)" value="20">
             <img src="./resources/img/volume_on.png" alt="volume_on">
         </div>
-        <button class="back-button" onclick="view.switchView('home')">
-            <div class="button-text">back home</div>
-        </button>
+        <button class="back-button" onclick="view.switchView('home')">back home</button>
     </div>
     <script src="src/player/bullet.js"></script>
     <script src="src/player/playerControl.js"></script>
@@ -58,5 +54,19 @@
     <script src="src/system/mainView.js"></script>
     <script src="src/system/audioManager.js"></script>
     <script src="src/main.js"></script>
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+    e.preventDefault(); // 右クリックメニューを無効化
+});
+
+document.addEventListener('copy', function(e) {
+    e.preventDefault(); // コピー操作を無効化
+});
+
+document.addEventListener('selectstart', function(e) {
+    e.preventDefault(); // テキスト選択を無効化
+});
+
+    </script>
 </body>
 </html>

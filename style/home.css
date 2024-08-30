@@ -7,6 +7,7 @@
     justify-content: center;
     margin: 0;
     overflow: hidden;
+    border: 1px white solid;
 }
 
 #home h1{
@@ -16,10 +17,37 @@
     text-align: center;
 }
 
-#home button{
+#home button {
     color: white;
     background: none;
     width: 240px;
     height: 50px;
     font-size: large;
+    border: 1px solid white;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s ease-in-out;
+}
+
+#home button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid white;
+    transform: scale(0);
+    transition: transform 0.4s ease-in-out;
+    z-index: -1;
+    pointer-events: none;
+}
+
+#home button:hover::before {
+    transform: scale(1);
+}
+
+#home button:hover {
+    color: black;
+    background-color: white;
 }
