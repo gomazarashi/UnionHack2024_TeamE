@@ -19,7 +19,7 @@ class CanvasStyle {
 
         // スコアとライフの初期化　表示のために設定しているが、後ほどゲーム管理用のjsファイルに移動する
         this.score = 0;
-        this.lives = 3;
+        this.lives = 100;
     }
 
     drawBackground(color = '#111') {
