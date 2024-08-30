@@ -26,6 +26,9 @@ class gameView {
         this.bossBullets = [];
 
         this.boss = new BossCharacter(this.ctx);
+
+        // ボス周辺の敵機を格納する配列
+        this.orbitingEnemies = []; 
     }
 
     update() {
@@ -69,8 +72,10 @@ class gameView {
 
         if (this.boss && this.boss.getExistence()) {
             this.boss.moveBoss();
+            this.boss.updateOrbitingEnemies(); // ボス周辺の敵機を更新
             this.boss.drawBoss(this.ctx);
             this.boss.moveBullets();
+            
 
             // ボスの弾とプレイヤーの衝突判定
             this.boss.bullets = this.boss.bullets.filter(bullet => bullet.getExistence());
@@ -98,7 +103,7 @@ class gameView {
                     }
                 }
             }
-        });
+        })
 
         if (this.flag) {
             requestAnimationFrame(() => this.update());
@@ -178,6 +183,7 @@ class gameView {
         this.bossSpawned = true;
 
         this.boss.existence = true;
+        this.boss.spawnOrbitingEnemies(); // ボス周辺の敵機を生成
     }
 
     GameOver() {

@@ -12,6 +12,12 @@ class BossCharacter {
 
         this.shootInterval = 100; // 発射間隔
         this.currentCooldown = 0; // クールダウンタイマー
+
+        // ボス周辺を回る敵機のプロパティ
+        this.orbitingEnemies = [];
+        this.orbitingEnemyRadius = 100;
+        this.orbitingEnemySpeed = 0.02; // 回転速度
+        this.orbitingEnemyCount = 5; // 周囲に配置する敵機の数
     }
 
     drawBoss(ctx) {
@@ -42,6 +48,37 @@ class BossCharacter {
                 this.speed = -this.speed; // 画面端で反転
             }
         }
+    }
+
+    spawnOrbitingEnemies() {
+        const angleStep = (2 * Math.PI) / this.orbitingEnemyCount;
+        for (let i = 0; i < this.orbitingEnemyCount; i++) {
+            const angle = i * angleStep;
+            const x = this.positionX + this.orbitingEnemyRadius * Math.cos(angle);
+            const y = this.positionY + this.orbitingEnemyRadius * Math.sin(angle);
+            const enemy = new Enemy(x, y, 2, 2, 20, 100, 100, this.gameView); // 例: 速度やサイズ、スコアは適宜調整
+            this.orbitingEnemies.push(enemy);
+        }
+    }
+
+    updateOrbitingEnemies() {
+        const angleStep = (2 * Math.PI) / this.orbitingEnemyCount; // 敵機同士の間の角度
+        const rotationSpeed = this.orbitingEnemySpeed * performance.now() / 1000; // 時間に基づく回転角度
+
+        this.orbitingEnemies.forEach((enemy, index) => {
+            // 各敵機の角度を計算し、時間に基づいて回転させる
+            const angle = index * angleStep + rotationSpeed;
+
+            // 敵機の新しい位置を計算
+            enemy.positionX = this.positionX + this.orbitingEnemyRadius * Math.cos(angle);
+            enemy.positionY = this.positionY + this.orbitingEnemyRadius * Math.sin(angle);
+
+            // 敵機の描画
+            enemy.drawEnemy(this.ctx);
+        });
+    }
+    removeOrbitingEnemy(enemy) {
+        this.orbitingEnemies = this.orbitingEnemies.filter(e => e !== enemy);
     }
 
     shoot() {
