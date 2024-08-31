@@ -67,6 +67,9 @@ class BossCharacter {
         const rotationSpeed = this.orbitingEnemySpeed * performance.now() / 1000; // 時間に基づく回転角度
     
         this.orbitingEnemies.forEach((enemy, index) => {
+            if (!enemy.existence) {
+                return;
+            }
             // 各敵機の角度を計算し、時間に基づいて回転させる
             const angle = index * angleStep + rotationSpeed;
     
