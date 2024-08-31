@@ -1,4 +1,4 @@
-class enemyFrequency{
+class EnemyFrequency{
     constructor(interval = 120, gameView){
         this.enemyList = new Array(10).fill(null);
         this.interval = interval;
@@ -28,9 +28,9 @@ class enemyFrequency{
         if (num<1) {
             return new Enemy(x,y,speedX,speedY,20,100,100,this.gameView)
         }else if (num<2) {
-            return new enemyBlue(x,y,speedX,speedY,20,100,100,this.gameView)
+            return new EnemyBlue(x,y,speedX,speedY,20,100,100,this.gameView)
         }else{
-            return new enemyGreen(x,y,speedX,speedY,40,100,100,this.gameView);
+            return new EnemyGreen(x,y,speedX,speedY,40,100,100,this.gameView);
         }
     }
 

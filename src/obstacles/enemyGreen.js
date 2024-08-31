@@ -1,4 +1,4 @@
-class enemyGreen extends Enemy{
+class EnemyGreen extends Enemy{
 
     constructor(x, y, speedX = 2, speedY = 2, size = 40, score = 100, shootInterval = 100,gameView){
         super(x,y,speedX,speedY,size,score,shootInterval,gameView);

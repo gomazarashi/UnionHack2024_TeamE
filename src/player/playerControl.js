@@ -1,4 +1,4 @@
-class playerControl {
+class PlayerControl {
     constructor() {
         this.speed = 3;
         this.positionX = 320;
@@ -70,12 +70,12 @@ class playerControl {
     addBullet() {
         if (this.bulletType === 'single') {
             // 単方向の弾を発射
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY));
+            this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY));
         } else if (this.bulletType === 'triple') {
             // 3方向の弾を発射
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, 0, -5));  // 真上
-            this.bulletArray.push(new playerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
+            this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
+            this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 0, -5));  // 真上
+            this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
         }
     }
 

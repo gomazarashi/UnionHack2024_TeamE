@@ -1,6 +1,6 @@
-class enemyBlue extends Enemy{
-    constructor(x, y, speedX = 2, speedY = 2, size = 20, score = 100, shootInterval = 100,gameView){
-        super(x,y,speedX,speedY,size,score,shootInterval,gameView);
+class EnemyBlue extends Enemy {
+    constructor(x, y, speedX = 2, speedY = 2, size = 20, score = 100, shootInterval = 100, gameView) {
+        super(x, y, speedX, speedY, size, score, shootInterval, gameView);
     }
 
     drawEnemy(ctx) {
@@ -22,7 +22,7 @@ class enemyBlue extends Enemy{
             this.speedY = -this.speedY;
         }
         if (this.positionY > 240 - this.size) {
-            this.speedY = this.speedY/2
+            this.speedY = this.speedY / 2
         }
     }
 
@@ -35,11 +35,11 @@ class enemyBlue extends Enemy{
     }
 
     shoot3() {
-        const bullet1 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size,-2,2);
+        const bullet1 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size, -2, 2);
         this.gameView.addEnemyBullet(bullet1);
-        const bullet2 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size,0,3);
+        const bullet2 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size, 0, 3);
         this.gameView.addEnemyBullet(bullet2);
-        const bullet3 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size,2,2);
+        const bullet3 = new EnemyBlueBullet(this.positionX + this.size / 2, this.positionY + this.size, 2, 2);
         this.gameView.addEnemyBullet(bullet3);
         this.currentCooldown = this.shootInterval; // クールダウンをリセット
     }

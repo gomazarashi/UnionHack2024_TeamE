@@ -4,11 +4,11 @@ class gameView {
 
         this.mainview = mainview;
 
-        this.player = new playerControl()
+        this.player = new PlayerControl()
         this.canvasStyle = new CanvasStyle(canvas, ctx);
         this.flag = false;
 
-        this.enemyManager = new enemyFrequency(120, this);
+        this.enemyManager = new EnemyFrequency(120, this);
 
         // 敵の弾を管理する配列
         this.enemyBullets = [];
@@ -207,9 +207,9 @@ class gameView {
         this.canvasStyle.setResultScore();
         this.canvasStyle.resetLives();
         this.canvasStyle.resetScore();
-        this.player = new playerControl()
+        this.player = new PlayerControl()
         this.flag = false;
-        this.enemyManager = new enemyFrequency(120, this);
+        this.enemyManager = new EnemyFrequency(120, this);
         // 敵の弾を管理する配列
         this.enemyBullets = [];
         this.mainview.switchView('result');
