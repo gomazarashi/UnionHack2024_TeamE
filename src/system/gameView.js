@@ -90,7 +90,7 @@ class gameView {
                 this.boss.orbitingEnemies.forEach(enemy => {
                     if (enemy && enemy.existence) {
                         if (enemy.checkCollision(bullet)) {
-                            console.log('Orbiting enemy hit!');
+                            // console.log('Orbiting enemy hit!');
                             // 敵機が倒れたら何か処理が必要ならここで行う
                         }
                     }
@@ -120,7 +120,7 @@ class gameView {
                     this.boss.takeDamage(1); // 弾が当たったらダメージを受ける
                     bullet.existence = false; // 弾を消す
                     if (!this.boss.getExistence()) {
-                        this.canvasStyle.addScore(10000); // ボスを倒したらスコアを加算
+                        this.canvasStyle.addScore(5000+(25*this.bossCounter)); // ボスを倒したらスコアを加算
                         this.HandleBossDefeat();
                     }
                 }
