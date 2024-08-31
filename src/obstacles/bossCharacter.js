@@ -56,13 +56,16 @@ class BossCharacter {
 
     spawnOrbitingEnemies(bossCounter) {
         this.orbitingEnemyCount += bossCounter;
-        this.orbitingEnemiesExistence = new Array(this.orbitingEnemyCount).fill(-1);
+        this.orbitingEnemyRadius++;
+        this.orbitingEnemiesExistence = new Array(this.orbitingEnemyCount).fill(-1).map((v,i)=>parseInt(Math.random()*60));
+        this.orbitingEnemies = [];
         const angleStep = (2 * Math.PI) / this.orbitingEnemyCount;
         for (let i = 0; i < this.orbitingEnemyCount; i++) {
             const angle = i * angleStep;
             const x = this.positionX + this.orbitingEnemyRadius * Math.cos(angle);
             const y = this.positionY + this.orbitingEnemyRadius * Math.sin(angle);
             const enemy = new Enemy(x, y, 2, 2, 20, 100, 100, this.gameView); // 例: 速度やサイズ、スコアは適宜調整
+            enemy.existence = false;
             this.orbitingEnemies.push(enemy);
         }
     }
