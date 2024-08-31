@@ -1,4 +1,4 @@
-class playerControl {
+class PlayerControl {
     constructor() {
         this.speed = 3;
         this.positionX = 320;
