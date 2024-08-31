@@ -19,6 +19,9 @@ class BossCharacter {
         this.orbitingEnemyRadius = 80;
         this.orbitingEnemySpeed = 1.5; // 回転速度
         this.orbitingEnemyCount = 15; // 周囲に配置する敵機の数
+
+        // ボス周辺を回る敵機の復活用
+        this.orbitingEnemiesExistence = new Array(this.orbitingEnemyCount).fill(-1);
     }
 
     drawBoss(ctx) {
@@ -51,7 +54,9 @@ class BossCharacter {
         }
     }
 
-    spawnOrbitingEnemies() {
+    spawnOrbitingEnemies(bossCounter) {
+        this.orbitingEnemyCount += bossCounter;
+        this.orbitingEnemiesExistence = new Array(this.orbitingEnemyCount).fill(-1);
         const angleStep = (2 * Math.PI) / this.orbitingEnemyCount;
         for (let i = 0; i < this.orbitingEnemyCount; i++) {
             const angle = i * angleStep;
@@ -67,6 +72,17 @@ class BossCharacter {
         const rotationSpeed = this.orbitingEnemySpeed * performance.now() / 1000; // 時間に基づく回転角度
     
         this.orbitingEnemies.forEach((enemy, index) => {
+            if (!enemy.existence) {
+                if (this.orbitingEnemiesExistence[index] < 0) {
+                    this.orbitingEnemiesExistence[index] = 300;
+                }else if (this.orbitingEnemiesExistence[index] === 0) {
+                    enemy.existence = true;
+                    this.orbitingEnemiesExistence[index] = -1;
+                }else{
+                    this.orbitingEnemiesExistence[index] -= 1;
+                }
+                return;
+            }
             // 各敵機の角度を計算し、時間に基づいて回転させる
             const angle = index * angleStep + rotationSpeed;
     
@@ -136,7 +152,8 @@ class BossCharacter {
     takeDamage(damage) {
         // ボスがダメージを受ける
         this.hp -= damage;
-        if (this.hp <= 0) {
+        if (this.hp <= 0 && this.existence) {
+            this.gameView.HandleBossDefeat(10000);
             this.existence = false; // HPが0以下になったらボスは存在しなくなる
         }
     }

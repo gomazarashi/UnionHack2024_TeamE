@@ -27,6 +27,9 @@ class gameView {
 
         this.boss = new BossCharacter(this.ctx, this);
 
+        this.bossCounter = 0;
+        this.NextBossSpan = 500;
+
         // ボス周辺の敵機を格納する配列
         this.orbitingEnemies = [];
     }
@@ -87,7 +90,7 @@ class gameView {
                 this.boss.orbitingEnemies.forEach(enemy => {
                     if (enemy && enemy.existence) {
                         if (enemy.checkCollision(bullet)) {
-                            console.log('Orbiting enemy hit!');
+                            // console.log('Orbiting enemy hit!');
                             // 敵機が倒れたら何か処理が必要ならここで行う
                         }
                     }
@@ -117,7 +120,8 @@ class gameView {
                     this.boss.takeDamage(1); // 弾が当たったらダメージを受ける
                     bullet.existence = false; // 弾を消す
                     if (!this.boss.getExistence()) {
-                        this.canvasStyle.addScore(10000); // ボスを倒したらスコアを加算
+                        this.canvasStyle.addScore(5000+(25*this.bossCounter)); // ボスを倒したらスコアを加算
+                        this.HandleBossDefeat();
                     }
                 }
             }
@@ -189,7 +193,7 @@ class gameView {
     // ボスの出現判定を行うメソッド
     checkForBossSpawn() {
         this.score = this.canvasStyle.getScoreAndLives().score;
-        if ((this.score >= 500) && (this.bossSpawned === false)) { // スコアが一定値を超えたらボスを出現させる
+        if ((this.score >= this.NextBossSpan) && (this.bossSpawned === false)) { // スコアが一定値を超えたらボスを出現させる
             this.spawnBoss();
         }
     }
@@ -199,8 +203,17 @@ class gameView {
         // ボスキャラをインスタンス化
         this.bossSpawned = true;
 
+        this.boss.hp = 20 + 10*this.bossCounter;
+
         this.boss.existence = true;
-        this.boss.spawnOrbitingEnemies(); // ボス周辺の敵機を生成
+        this.boss.spawnOrbitingEnemies(this.bossCounter); // ボス周辺の敵機を生成
+    }
+
+    HandleBossDefeat() {
+        this.bossCounter++;
+        this.NextBossSpan = this.canvasStyle.getScoreAndLives().score + 500*Math.sqrt(this.bossCounter);
+        this.bossSpawned = false;
+        this.enemyManager.setIntervalFromCounter(this.bossCounter);
     }
 
     GameOver() {

@@ -9,13 +9,15 @@ class PlayerControl {
             s: false,
             d: false,
             w: false,
-            Space: false
+            Space: -1,
         };
         window.addEventListener("keydown", this.handleKeyPress.bind(this));
         window.addEventListener("keyup", this.handleKeyRelease.bind(this));
 
         this.bulletArray = new Array();
         this.bulletType = 'single'; // 弾の種類を管理するプロパティ
+
+        this.tripleBulletCounter = 0;
     }
 
     drawPlayer(ctx) {
@@ -49,7 +51,7 @@ class PlayerControl {
 
         if (this.controler.Space) {
             this.addBullet();
-            this.controler.Space = false;
+            this.controler.Space = 0;
         }
 
         //画面端の指定
@@ -65,14 +67,24 @@ class PlayerControl {
         if (this.positionY > 480) {
             this.positionY = 480;
         }
+
+        this.tripleBulletCounter--;
     }
 
     addBullet() {
-        if (this.bulletType === 'single') {
+        // if (this.bulletType === 'single') {
+        //     // 単方向の弾を発射
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY));
+        // } else if (this.bulletType === 'triple') {
+        //     // 3方向の弾を発射
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 0, -5));  // 真上
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
+        // }
+        if (this.tripleBulletCounter<=0) {
             // 単方向の弾を発射
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY));
-        } else if (this.bulletType === 'triple') {
-            // 3方向の弾を発射
+        }else{
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 0, -5));  // 真上
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
@@ -97,12 +109,15 @@ class PlayerControl {
                 break;
             case "d":
                 this.controler.d = true;
+                console.log('push');
                 break;
             case "w":
                 this.controler.w = true;
                 break;
             case " ":
-                this.controler.Space = true;
+                if (this.controler.Space === -1) {
+                    this.controler.Space = 1;
+                }
                 break;
         }
     }
@@ -122,14 +137,14 @@ class PlayerControl {
                 this.controler.w = false;
                 break;
             case " ":
-                this.controler.Space = true;
+                this.controler.Space = -1;
                 break;
         }
     }
 
     // プレイヤーのスピードを上げる
     speedUp() {
-        this.maxSpeed = 6;
+        this.maxSpeed = 12;
         if (this.speed <= this.maxSpeed) {
             this.speed += 1;
         }
@@ -138,6 +153,7 @@ class PlayerControl {
     // アイテムを取得したときに弾の種類を変更する
     changeBulletType(type) {
         this.bulletType = type;
+        this.tripleBulletCounter = 300;
     }
 
 }

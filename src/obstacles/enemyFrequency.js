@@ -49,4 +49,8 @@ class EnemyFrequency{
             return null;
         });
     }
+
+    setIntervalFromCounter(bossCounter){
+        this.interval = parseInt(120/Math.sqrt(bossCounter));
+    };
 }

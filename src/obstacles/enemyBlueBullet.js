@@ -7,7 +7,7 @@ class EnemyBlueBullet extends EnemyBullet{
 
     drawBullet(ctx){
         ctx.beginPath();
-        ctx.strokeStyle = "blue";
+        ctx.strokeStyle = "aqua";
         ctx.arc(this.positionX, this.positionY, this.size, 0, Math.PI * 2);
         ctx.stroke();
     }

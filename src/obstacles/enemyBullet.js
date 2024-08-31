@@ -33,8 +33,12 @@ class EnemyBullet {
 
     drawBullet(ctx){
         ctx.beginPath();
-        ctx.strokeStyle = "yellow";
+        ctx.strokeStyle = "red";
         ctx.arc(this.positionX, this.positionY, this.size, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.strokeStyle = "white";
+        ctx.arc(this.positionX, this.positionY, this.size-1, 0, Math.PI * 2);
         ctx.stroke();
     }
 
