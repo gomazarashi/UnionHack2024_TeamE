@@ -51,7 +51,8 @@ class BossCharacter {
         }
     }
 
-    spawnOrbitingEnemies() {
+    spawnOrbitingEnemies(bossCounter) {
+        this.orbitingEnemyCount += bossCounter;
         const angleStep = (2 * Math.PI) / this.orbitingEnemyCount;
         for (let i = 0; i < this.orbitingEnemyCount; i++) {
             const angle = i * angleStep;
@@ -139,7 +140,8 @@ class BossCharacter {
     takeDamage(damage) {
         // ボスがダメージを受ける
         this.hp -= damage;
-        if (this.hp <= 0) {
+        if (this.hp <= 0 && this.existence) {
+            this.gameView.HandleBossDefeat(10000);
             this.existence = false; // HPが0以下になったらボスは存在しなくなる
         }
     }
