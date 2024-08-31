@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="style/home.css">
     <link rel="stylesheet" href="style/result.css">
     <link rel="stylesheet" href="style/option.css">
+    <link rel="stylesheet" href="style/help.css">
 </head>
 
 <body>
     <div class="sparkles"></div>
     <canvas id="canvas" width="640" height="480"></canvas>
     <div id="home">
-        <h1>Title</h1>
-        <button id="start">start</button>
+        <h1 id="hedder-text">Title</h1>
+        <button id="helpButton">How to play</button>
         <button id="optionButtom">option</button>
+        <button id="start">start</button>
     </div>
     <div id="result">
         <div class="score-label">Score</div>
@@ -36,7 +38,11 @@
             <input type="range" name="volume" id="volume" oninput="view.setVolume(this.value)" value="20">
             <img src="./resources/img/volume_on.png" alt="volume_on">
         </div>
-        <button class="back-button" onclick="view.switchView('home')">back home</button>
+        <button class="back-button" onclick="view.popHome()">back home</button>
+    </div>
+    <div id="help">
+        <iframe src="./help/howToPlay.html" frameborder="0"></iframe>
+        <button onclick="view.popHome()">×</button>
     </div>
     <script src="src/player/bullet.js"></script>
     <script src="src/player/playerControl.js"></script>
@@ -55,5 +61,6 @@
     <script src="src/system/audioManager.js"></script>
     <script src="src/main.js"></script>
     <script src="src/setting.js"></script>
+    <script src="src/backGround.js"></script>
 </body>
 </html>
