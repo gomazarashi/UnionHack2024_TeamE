@@ -1,4 +1,4 @@
-class playerBullet{
+class PlayerBullet{
     constructor(x,y,vectorX=0,vectorY=-4){
         this.vectorX = vectorX;
         this.vectorY = vectorY;
