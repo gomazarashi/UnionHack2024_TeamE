@@ -211,7 +211,7 @@ class gameView {
 
     HandleBossDefeat() {
         this.bossCounter++;
-        this.NextBossSpan = this.canvasStyle.getScoreAndLives().score + 500*this.bossCounter;
+        this.NextBossSpan = this.canvasStyle.getScoreAndLives().score + 500*Math.sqrt(this.bossCounter);
         this.bossSpawned = false;
         this.enemyManager.setIntervalFromCounter(this.bossCounter);
     }
