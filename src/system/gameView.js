@@ -28,7 +28,7 @@ class gameView {
         this.boss = new BossCharacter(this.ctx, this);
 
         this.bossCounter = 0;
-        this.NextBossSpan = 500;
+        this.NextBossSpan = 800;
 
         // ボス周辺の敵機を格納する配列
         this.orbitingEnemies = [];
@@ -211,7 +211,7 @@ class gameView {
 
     HandleBossDefeat() {
         this.bossCounter++;
-        this.NextBossSpan = this.canvasStyle.getScoreAndLives().score + 500*Math.sqrt(this.bossCounter);
+        this.NextBossSpan = this.canvasStyle.getScoreAndLives().score + 500*Math.sqrt(this.bossCounter*2);
         this.bossSpawned = false;
         this.enemyManager.setIntervalFromCounter(this.bossCounter);
     }
