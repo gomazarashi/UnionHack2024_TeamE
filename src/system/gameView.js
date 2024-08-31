@@ -181,7 +181,7 @@ class gameView {
     }
 
     applyItemEffect(type) {
-        if (type === 'playerSpeedUp') {
+        if (type === 'speedUp') {
             this.player.speedUp(); // プレイヤーのスピードアップ
         } else if (type === 'changeBulletType') {
             this.player.changeBulletType('triple'); // プレイヤーの弾の種類を3方向に変更
