@@ -9,7 +9,7 @@ class PlayerControl {
             s: false,
             d: false,
             w: false,
-            Space: false
+            Space: -1,
         };
         window.addEventListener("keydown", this.handleKeyPress.bind(this));
         window.addEventListener("keyup", this.handleKeyRelease.bind(this));
@@ -51,7 +51,7 @@ class PlayerControl {
 
         if (this.controler.Space) {
             this.addBullet();
-            this.controler.Space = false;
+            this.controler.Space = 0;
         }
 
         //画面端の指定
@@ -109,12 +109,15 @@ class PlayerControl {
                 break;
             case "d":
                 this.controler.d = true;
+                console.log('push');
                 break;
             case "w":
                 this.controler.w = true;
                 break;
             case " ":
-                this.controler.Space = true;
+                if (this.controler.Space === -1) {
+                    this.controler.Space = 1;
+                }
                 break;
         }
     }
@@ -134,7 +137,7 @@ class PlayerControl {
                 this.controler.w = false;
                 break;
             case " ":
-                this.controler.Space = true;
+                this.controler.Space = -1;
                 break;
         }
     }
