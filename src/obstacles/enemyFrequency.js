@@ -30,7 +30,7 @@ class EnemyFrequency{
         }else if (num<2) {
             return new EnemyBlue(x,y,speedX,speedY,20,100,100,this.gameView)
         }else{
-            return new enemyGreen(x,y,speedX,speedY,40,100,100,this.gameView);
+            return new EnemyGreen(x,y,speedX,speedY,40,100,100,this.gameView);
         }
     }
 
