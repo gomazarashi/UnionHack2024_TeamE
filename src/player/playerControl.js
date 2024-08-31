@@ -109,7 +109,6 @@ class PlayerControl {
                 break;
             case "d":
                 this.controler.d = true;
-                console.log('push');
                 break;
             case "w":
                 this.controler.w = true;
