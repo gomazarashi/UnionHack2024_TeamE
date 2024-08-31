@@ -1,0 +1,45 @@
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作説明</title>
+    <link rel="stylesheet" href="./help.css">
+</head>
+<body>
+    <header>
+        <h1>how to play</h1>
+    </header>
+    <main>
+        <!-- <section>
+            <h1>
+                推奨環境
+            </h1>
+            <p>
+                PC
+            </p>
+        </section> -->
+
+        <section>
+            <h1>操作方法</h1>
+            <ul>
+                <li><span class="key">w</span>: 上へ移動</li>
+                <li><span class="key">a</span>: 左へ移動</li>
+                <li><span class="key">s</span>: 下へ移動</li>
+                <li><span class="key">d</span>: 右へ移動</li>
+                <li><span class="key">space</span>: 弾の発射</li>
+                <li><span class="key">Escape</span>: 一時停止</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>敵を倒してハイスコアを目指しましょう</h1>
+            <canvas id="enemy" width="100px" height="40px"></canvas>
+            <h1>アイテムを取得することで、プレイヤーの能力を強化することができます</h1>
+            <canvas id="item" width="70px" height="20px"></canvas>
+            <h1>定期的にボスが現れます。倒すと高得点!!</h1>
+            <canvas id="boss" width="80px" height="80px"></canvas>
+        </section>
+        <script src="./helpCanvas.js"></script>
+    </main>
+</body>
+</html>

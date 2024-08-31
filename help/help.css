@@ -1,0 +1,39 @@
+body {
+    background-color: rgb(30, 30, 30); /* 背景を黒に設定 */
+    color: white; /* テキストを白に設定 */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center; /* 全体のテキストを中央寄せに設定 */
+}
+header, main {
+    text-align: center; /* headerとmainを中央揃えに設定 */
+}
+main {
+    display: inline-block; /* main要素をインラインブロックにして中央に配置 */
+    max-width: 800px; /* コンテンツの最大幅を設定 */
+    width: 100%;
+    text-align: start;
+}
+header h1, section h1 {
+    color: lightgreen; /* 見出しをライトグリーンに設定 */
+}
+section dl, section ul, section dd {
+    color: white; /* セクション内のテキストを白に設定 */
+}
+section ul {
+    list-style-type: none; /* liの点を消す */
+    padding-left: 0; /* インデントを消す */
+}
+.key {
+    font-weight: bold; /* 太字に設定 */
+    background-color: #333; /* 背景色をダークグレーに設定 */
+    color: lightgreen; /* 文字色をライトグリーンに設定 */
+    padding: 2px 5px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 5px;
+}
+canvas {
+    display: block;
+}
