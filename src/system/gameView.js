@@ -203,7 +203,7 @@ class gameView {
         // ボスキャラをインスタンス化
         this.bossSpawned = true;
 
-        this.boss.hp = 20 + 20*this.bossCounter;
+        this.boss.hp = 20 + 10*this.bossCounter;
 
         this.boss.existence = true;
         this.boss.spawnOrbitingEnemies(this.bossCounter); // ボス周辺の敵機を生成
