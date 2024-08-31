@@ -34,9 +34,10 @@ class CanvasStyle {
         this.ctx.fillText(`LIFE: ${this.lives}`, (this.canvas.width / this.dpr) - 100, 30); // ライフの表示
     }
 
-    // スコアを加算するメソッド
-    addScore(points) {
-        this.score += points;
+
+    // ライフを増やすメソッド
+    increaseLife() {
+        this.lives += 1;
     }
 
     // ライフを減らすメソッド
@@ -44,14 +45,19 @@ class CanvasStyle {
         this.lives -= 1;
     }
 
-    // スコアをリセットするメソッド
-    resetScore() {
-        this.score = 0;
-    }
-
     // ライフをリセットするメソッド
     resetLives() {
         this.lives = 3;
+    }
+
+    // スコアを加算するメソッド
+    addScore(points) {
+        this.score += points;
+    }
+
+    // スコアをリセットするメソッド
+    resetScore() {
+        this.score = 0;
     }
 
     // スコアとライフを取得するメソッド

@@ -181,6 +181,8 @@ class gameView {
             this.player.speedUp(); // プレイヤーのスピードアップ
         } else if (type === 'changeBulletType') {
             this.player.changeBulletType('triple'); // プレイヤーの弾の種類を3方向に変更
+        } else if (type === 'heal') {
+            this.canvasStyle.increaseLife(); // プレイヤーのライフを回復
         }
     }
 

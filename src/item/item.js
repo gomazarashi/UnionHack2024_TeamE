@@ -19,6 +19,8 @@ class Item {
             ctx.fillStyle = 'rgb(255, 165, 0)'; // オレンジ色
         } else if (this.type === 'changeBulletType') {
             ctx.fillStyle = 'rgb(0, 0, 255)'; // 青色
+        } else if (this.type === 'heal') {
+            ctx.fillStyle = 'rgb(0, 128, 0)'; // 緑色
         }
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);

@@ -43,7 +43,15 @@ class Enemy {
 
             // アイテムを落とす処理
             if (Math.random() <= 0.6) { // 60%の確率でアイテムを落とす
-                const itemType = Math.random() <= 0.5 ? 'speedUp' : 'changeBulletType';
+                let itemType;
+                if (Math.random() <= 0.4) {
+                    itemType = 'speedUp';
+                } else if (Math.random() <= 0.8) {
+                    itemType = 'changeBulletType';
+                } else {
+                    itemType = 'heal';
+                }
+
                 this.dropItem(this.positionX, this.positionY, itemType);
             }
             return true;
