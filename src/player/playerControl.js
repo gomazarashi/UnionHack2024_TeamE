@@ -16,6 +16,8 @@ class PlayerControl {
 
         this.bulletArray = new Array();
         this.bulletType = 'single'; // 弾の種類を管理するプロパティ
+
+        this.tripleBulletCounter = 0;
     }
 
     drawPlayer(ctx) {
@@ -65,14 +67,24 @@ class PlayerControl {
         if (this.positionY > 480) {
             this.positionY = 480;
         }
+
+        this.tripleBulletCounter--;
     }
 
     addBullet() {
-        if (this.bulletType === 'single') {
+        // if (this.bulletType === 'single') {
+        //     // 単方向の弾を発射
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY));
+        // } else if (this.bulletType === 'triple') {
+        //     // 3方向の弾を発射
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 0, -5));  // 真上
+        //     this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
+        // }
+        if (this.tripleBulletCounter<=0) {
             // 単方向の弾を発射
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY));
-        } else if (this.bulletType === 'triple') {
-            // 3方向の弾を発射
+        }else{
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, -2, -5)); // 左斜め上
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 0, -5));  // 真上
             this.bulletArray.push(new PlayerBullet(this.positionX, this.positionY, 2, -5));  // 右斜め上
@@ -129,7 +141,7 @@ class PlayerControl {
 
     // プレイヤーのスピードを上げる
     speedUp() {
-        this.maxSpeed = 6;
+        this.maxSpeed = 12;
         if (this.speed <= this.maxSpeed) {
             this.speed += 1;
         }
@@ -138,6 +150,7 @@ class PlayerControl {
     // アイテムを取得したときに弾の種類を変更する
     changeBulletType(type) {
         this.bulletType = type;
+        this.tripleBulletCounter = 300;
     }
 
 }
