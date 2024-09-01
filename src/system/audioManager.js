@@ -5,6 +5,15 @@ class AudioManager {
         this.bgm.loop = true; // ループ再生を有効にする
         this.bgm.volume = 0.2; // 音量を設定（0.0から1.0の範囲）
 
+        this.SE = {
+            damage:new Audio('./resources/sound/takeDamage.mp3'),
+            speedUp:new Audio('./resources/sound/speedUp.mp3'),
+            powerUp:new Audio('./resources/sound/powerUp.mp3'),
+            heal:new Audio('./resources/sound/heal.mp3'),
+        }
+        Object.values(this.SE).forEach(se => {
+            se.volume = 1;
+        });
     }
 
     // BGMの再生
@@ -26,5 +35,17 @@ class AudioManager {
     // BGMの音量設定
     setVolume(volume) {
         this.bgm.volume = volume;
+    }
+
+    // BGMの再生
+    playSE(type) {
+        this.SE[type].play();
+    }
+
+    // BGMの音量設定
+    setSEVolume(volume) {
+        Object.values(this.SE).forEach(se => {
+            se.volume = volume;
+        });
     }
 }

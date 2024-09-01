@@ -33,9 +33,16 @@
         <div class="circle-large"></div>
     </div>
     <div id="option">
+        <h1 style="color: white;">BGM</h1>
         <div>
             <img src="./resources/img/volume_off.png" alt="volume_off">
             <input type="range" name="volume" id="volume" oninput="view.setVolume(this.value)" value="20">
+            <img src="./resources/img/volume_on.png" alt="volume_on">
+        </div>
+        <h1 style="color: white;">SE</h1>
+        <div>
+            <img src="./resources/img/volume_off.png" alt="volume_off">
+            <input type="range" name="volume" id="volume" oninput="view.setSEVolume(this.value)" value="20">
             <img src="./resources/img/volume_on.png" alt="volume_on">
         </div>
         <button class="back-button" onclick="view.popHome()">back home</button>

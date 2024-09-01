@@ -5,7 +5,6 @@ class gameView {
         this.mainview = mainview;
 
         this.player = new PlayerControl()
-        this.canvasStyle = new CanvasStyle(canvas, ctx);
         this.flag = false;
 
         this.enemyManager = new EnemyFrequency(120, this);
@@ -15,6 +14,8 @@ class gameView {
 
         // BGMを管理するインスタンスを生成
         this.audioManager = audioManager;
+
+        this.canvasStyle = new CanvasStyle(canvas, ctx, this.audioManager);
 
         // アイテムを管理する配列
         this.items = [];
@@ -103,13 +104,13 @@ class gameView {
             this.boss.bullets = this.boss.bullets.filter(bullet => bullet.getExistence());
             this.boss.bullets.forEach(bullet => {
                 if (bullet.checkCollisionWithPlayer(this.player)) {
-                    this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                    this.canvasStyle.decreaseLife(this.player); // プレイヤーのライフを減少
                     bullet.existence = false; // 弾を消す
                 }
             });
 
             if (this.boss.checkCollisionWithPlayer(this.player)) {
-                this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                this.canvasStyle.decreaseLife(this.player); // プレイヤーのライフを減少
             }
         }
 
@@ -141,7 +142,7 @@ class gameView {
 
             // プレイヤーとの衝突判定
             if (bullet.checkCollisionWithPlayer(this.player)) {
-                this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                this.canvasStyle.decreaseLife(this.player); // プレイヤーのライフを減少
                 bullet.existence = false; // 弾を消す
             }
         });
@@ -181,12 +182,15 @@ class gameView {
     }
 
     applyItemEffect(type) {
-        if (type === 'playerSpeedUp') {
+        if (type === 'speedUp') {
             this.player.speedUp(); // プレイヤーのスピードアップ
+            this.audioManager.playSE('speedUp');
         } else if (type === 'changeBulletType') {
             this.player.changeBulletType('triple'); // プレイヤーの弾の種類を3方向に変更
+            this.audioManager.playSE('powerUp');
         } else if (type === 'heal') {
             this.canvasStyle.increaseLife(); // プレイヤーのライフを回復
+            this.audioManager.playSE('heal');
         }
     }
 

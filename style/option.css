@@ -5,6 +5,10 @@
     display: none;
     justify-items: center;
     border: 1px white solid;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    overflow: hidden;
 }
 #option div{
     align-items: center;
@@ -28,8 +32,8 @@
     padding-bottom: 11px;
     padding-left: 27px;
     padding-right: 26px;
-    left: 10px;
-    top: 100px;
+    left: 0px;
+    top: 0px;
     width: 240px;
     position: relative;
     border: 1px solid white;
