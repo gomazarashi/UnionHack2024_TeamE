@@ -103,13 +103,13 @@ class gameView {
             this.boss.bullets = this.boss.bullets.filter(bullet => bullet.getExistence());
             this.boss.bullets.forEach(bullet => {
                 if (bullet.checkCollisionWithPlayer(this.player)) {
-                    this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                    this.canvasStyle.decreaseLife(this.player); // プレイヤーのライフを減少
                     bullet.existence = false; // 弾を消す
                 }
             });
 
             if (this.boss.checkCollisionWithPlayer(this.player)) {
-                this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                this.canvasStyle.decreaseLife(this.player); // プレイヤーのライフを減少
             }
         }
 
@@ -141,7 +141,7 @@ class gameView {
 
             // プレイヤーとの衝突判定
             if (bullet.checkCollisionWithPlayer(this.player)) {
-                this.canvasStyle.decreaseLife(); // プレイヤーのライフを減少
+                this.canvasStyle.decreaseLife(this.player); // プレイヤーのライフを減少
                 bullet.existence = false; // 弾を消す
             }
         });

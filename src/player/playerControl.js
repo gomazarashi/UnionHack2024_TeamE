@@ -23,7 +23,13 @@ class PlayerControl {
     drawPlayer(ctx) {
         ctx.strokeStyle = "white";
         ctx.strokeRect(this.positionX - 15, this.positionY - 10, 30, 20);
-        ctx.strokeRect(this.positionX - 5, this.positionY - 20, 10, 10)
+        ctx.strokeRect(this.positionX - 5, this.positionY - 20, 10, 10);
+    }
+
+    fillDraw(ctx) {
+        ctx.fillStyle = "white";
+        ctx.fillRect(this.positionX - 15, this.positionY - 10, 30, 20);
+        ctx.fillRect(this.positionX - 5, this.positionY - 20, 10, 10);
     }
 
     movePlayer() {

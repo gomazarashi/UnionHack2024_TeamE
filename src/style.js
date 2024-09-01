@@ -41,8 +41,9 @@ class CanvasStyle {
     }
 
     // ライフを減らすメソッド
-    decreaseLife() {
+    decreaseLife(player) {
         this.lives -= 1;
+        player.fillDraw(this.ctx);
     }
 
     // ライフをリセットするメソッド
