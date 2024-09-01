@@ -19,6 +19,7 @@ class BossCharacter {
         this.orbitingEnemyRadius = 80;
         this.orbitingEnemySpeed = 1.5; // 回転速度
         this.orbitingEnemyCount = 15; // 周囲に配置する敵機の数
+        this.orbitingEnemyInterval = 120
 
         // ボス周辺を回る敵機の復活用
         this.orbitingEnemiesExistence = new Array(this.orbitingEnemyCount).fill(-1);
@@ -64,7 +65,7 @@ class BossCharacter {
             const angle = i * angleStep;
             const x = this.positionX + this.orbitingEnemyRadius * Math.cos(angle);
             const y = this.positionY + this.orbitingEnemyRadius * Math.sin(angle);
-            const enemy = new Enemy(x, y, 2, 2, 20, 100, 100, this.gameView); // 例: 速度やサイズ、スコアは適宜調整
+            const enemy = new Enemy(x, y, 2, 2, 20, 100, 120, this.gameView); // 例: 速度やサイズ、スコアは適宜調整
             enemy.existence = false;
             this.orbitingEnemies.push(enemy);
         }
@@ -93,9 +94,15 @@ class BossCharacter {
             enemy.positionX = this.positionX + this.orbitingEnemyRadius * Math.cos(angle)-10;
             enemy.positionY = this.positionY + this.orbitingEnemyRadius * Math.sin(angle)-10;
     
+            
             // 敵機の描画
             enemy.drawEnemy(this.ctx);
+            enemy.currentCooldown = this.orbitingEnemyInterval;
         });
+        if (this.orbitingEnemyInterval<=0) {
+            this.orbitingEnemyInterval = 120;
+        }
+        this.orbitingEnemyInterval --;
     }
     
 
