@@ -63,7 +63,7 @@ class mainView{
         switch (NextSituation) {
             case 'home':
                 home.style.display = 'grid'
-                this.text.innerHTML = 'title';
+                this.text.innerHTML = 'エターナルリング';
                 break;
             case 'game':
                 this.canvas.style.display = 'flex'

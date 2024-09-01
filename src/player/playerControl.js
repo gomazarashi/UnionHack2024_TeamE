@@ -9,7 +9,7 @@ class PlayerControl {
             s: false,
             d: false,
             w: false,
-            Space: -1,
+            Space: 0,
         };
         window.addEventListener("keydown", this.handleKeyPress.bind(this));
         window.addEventListener("keyup", this.handleKeyRelease.bind(this));

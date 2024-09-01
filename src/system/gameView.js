@@ -153,9 +153,11 @@ class gameView {
     }
 
     gameStart() {
+        this.player.controler.Space=0;
         this.flag = true;
         this.audioManager.playBGM(); // ゲーム開始時にBGMを再生
         this.update();
+        
     }
 
     gameStop() {
