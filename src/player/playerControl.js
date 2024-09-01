@@ -17,6 +17,8 @@ class PlayerControl {
         this.bulletArray = new Array();
         this.bulletType = 'single'; // 弾の種類を管理するプロパティ
 
+        this.speedUpTime = new Array();
+
         this.tripleBulletCounter = 0;
     }
 
@@ -33,6 +35,8 @@ class PlayerControl {
     }
 
     movePlayer() {
+        this.speed = this.speedUpTime.length+3;
+        this.speedDown();
         if (this.controler.w && this.controler.a) {
             this.positionY -= (this.speed / Math.sqrt(2));
             this.positionX -= (this.speed / Math.sqrt(2));
@@ -75,6 +79,7 @@ class PlayerControl {
         }
 
         this.tripleBulletCounter--;
+
     }
 
     addBullet() {
@@ -149,11 +154,15 @@ class PlayerControl {
 
     // プレイヤーのスピードを上げる
     speedUp() {
-        console.log('speedUp');
-        this.maxSpeed = 6;
-        if (this.speed <= this.maxSpeed) {
-            this.speed += 1;
-        }
+        this.speedUpTime.push(600);
+        console.log(this.speedUpTime);
+    }
+
+    speedDown() {
+        console.log('test');
+        this.speedUpTime = this.speedUpTime
+            .map(t => t - 1)       // 各要素を1減少させる
+            .filter(t => t > 0);   // 0より大きい値だけを残す
     }
 
     // アイテムを取得したときに弾の種類を変更する
