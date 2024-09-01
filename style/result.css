@@ -45,29 +45,7 @@
     position: absolute;
 }
 
-.image1 {
-    width: 133px;
-    height: 134px;
-    left: 228px;
-    top: 177px;
-    position: absolute;
-}
 
-.image2 {
-    width: 131px;
-    height: 125px;
-    left: 37px;
-    top: 205px;
-    position: absolute;
-}
-
-.image3 {
-    width: 138px;
-    height: 150px;
-    left: 108px;
-    top: 8px;
-    position: absolute;
-}
 
 .back-button {
     padding-top: 11px;
