@@ -184,10 +184,13 @@ class gameView {
     applyItemEffect(type) {
         if (type === 'speedUp') {
             this.player.speedUp(); // プレイヤーのスピードアップ
+            this.audioManager.playSE('speedUp');
         } else if (type === 'changeBulletType') {
             this.player.changeBulletType('triple'); // プレイヤーの弾の種類を3方向に変更
+            this.audioManager.playSE('powerUp');
         } else if (type === 'heal') {
             this.canvasStyle.increaseLife(); // プレイヤーのライフを回復
+            this.audioManager.playSE('heal');
         }
     }
 
