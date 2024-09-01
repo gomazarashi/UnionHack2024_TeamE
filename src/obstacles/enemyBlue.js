@@ -53,7 +53,21 @@ class EnemyBlue extends Enemy {
             this.shoot3();
             this.existence = false; // 敵が倒された
             bullet.existence = false; // 弾が消える
+            // アイテムを落とす処理
+            if (Math.random() <= 0.6) { // 60%の確率でアイテムを落とす
+                let itemType;
+                if (Math.random() <= 0.2) {
+                    itemType = 'speedUp';
+                } else if (Math.random() <= 0.8) {
+                    itemType = 'changeBulletType';
+                } else {
+                    itemType = 'heal';
+                }
+
+                this.dropItem(this.positionX, this.positionY, itemType);
+            }
             return true;
+            
         }
         return false;
     }

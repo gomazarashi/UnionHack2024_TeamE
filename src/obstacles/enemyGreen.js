@@ -23,6 +23,19 @@ class EnemyGreen extends Enemy{
                 bullet.existence = false; // 弾が消える
                 return true;
             }
+            // アイテムを落とす処理
+            if (Math.random() <= 0.6) { // 60%の確率でアイテムを落とす
+                let itemType;
+                if (Math.random() <= 0.3) {
+                    itemType = 'speedUp';
+                } else if (Math.random() <= 0.6) {
+                    itemType = 'changeBulletType';
+                } else {
+                    itemType = 'heal';
+                }
+
+                this.dropItem(this.positionX, this.positionY, itemType);
+            }
             this.existence = false; // 敵が倒された
             bullet.existence = false; // 弾が消える
             return true;
