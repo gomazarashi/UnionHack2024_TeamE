@@ -5,7 +5,6 @@ class gameView {
         this.mainview = mainview;
 
         this.player = new PlayerControl()
-        this.canvasStyle = new CanvasStyle(canvas, ctx);
         this.flag = false;
 
         this.enemyManager = new EnemyFrequency(120, this);
@@ -15,6 +14,8 @@ class gameView {
 
         // BGMを管理するインスタンスを生成
         this.audioManager = audioManager;
+
+        this.canvasStyle = new CanvasStyle(canvas, ctx, this.audioManager);
 
         // アイテムを管理する配列
         this.items = [];

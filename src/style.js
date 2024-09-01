@@ -1,5 +1,5 @@
 class CanvasStyle {
-    constructor(canvas) {
+    constructor(canvas, ctx, audioManager) {
         this.canvas = canvas;
         this.ctx = canvas.getContext('2d');
 
@@ -20,6 +20,8 @@ class CanvasStyle {
         // スコアとライフの初期化　表示のために設定しているが、後ほどゲーム管理用のjsファイルに移動する
         this.score = 0;
         this.lives = 5;
+
+        this.audioManager = audioManager;
     }
 
     drawBackground(color = '#111') {
@@ -44,6 +46,7 @@ class CanvasStyle {
     decreaseLife(player) {
         this.lives -= 1;
         player.fillDraw(this.ctx);
+        this.audioManager.playSE('damage');
     }
 
     // ライフをリセットするメソッド
