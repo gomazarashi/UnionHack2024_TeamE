@@ -108,6 +108,10 @@ class mainView{
         this.audioManager.setVolume(volume/100);
     }
 
+    setSEVolume(volume){
+        this.audioManager.setSEVolume(volume/100);
+    }
+
     popHome(){
         if (this.text.innerHTML==='pause') {
             this.switchView('pause');
