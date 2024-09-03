@@ -155,11 +155,9 @@ class PlayerControl {
     // プレイヤーのスピードを上げる
     speedUp() {
         this.speedUpTime.push(600);
-        console.log(this.speedUpTime);
     }
 
     speedDown() {
-        console.log('test');
         this.speedUpTime = this.speedUpTime
             .map(t => t - 1)       // 各要素を1減少させる
             .filter(t => t > 0);   // 0より大きい値だけを残す

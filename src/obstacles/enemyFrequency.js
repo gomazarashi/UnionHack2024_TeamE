@@ -1,5 +1,6 @@
-class EnemyFrequency{
-    constructor(interval = 120, gameView){
+//enemyFrequency.js
+class EnemyFrequency {
+    constructor(interval = 120, gameView) {
         this.enemyList = new Array(10).fill(null);
         this.interval = interval;
         this.counter = 5;
@@ -7,30 +8,28 @@ class EnemyFrequency{
         this.enemyData = []
     }
 
-    management(){
-        if (this.counter<=0) {
+    management() {
+        if (this.counter <= 0) {
             const index = this.enemyList.indexOf(null);
-            if (index>=0) {
+            if (index >= 0) {
                 this.enemyList[index] = this.createEnemy();
                 this.counter = this.interval;
             }
-        }else{
+        } else {
             this.counter--;
         }
     }
 
-    createEnemy(){
-        const x = (Math.random()*600)+20;
-        const y = Math.random()*40 +20;
-        const speedX = Math.random()*3;
-        const speedY = Math.random()*3;
-        const num = Math.random()*3
-        if (num<1) {
-            return new Enemy(x,y,speedX,speedY,20,100,100,this.gameView)
-        }else if (num<2) {
-            return new EnemyBlue(x,y,speedX,speedY,20,100,100,this.gameView)
-        }else{
-            return new EnemyGreen(x,y,speedX,speedY,40,100,100,this.gameView);
+    createEnemy() {
+        const x = (Math.random() * 600) + 20;
+        const y = Math.random() * 40 + 20;
+        const num = Math.random() * 3
+        if (num < 1) {
+            return new RedEnemy(x, y, this.gameView);
+        } else if (num < 2) {
+            return new BlueEnemy(x, y, this.gameView);
+        } else {
+            return new GreenEnemy(x, y, this.gameView);
         }
     }
 
@@ -50,7 +49,7 @@ class EnemyFrequency{
         });
     }
 
-    setIntervalFromCounter(bossCounter){
-        this.interval = parseInt(120/Math.sqrt(bossCounter));
+    setIntervalFromCounter(bossCounter) {
+        this.interval = parseInt(120 / Math.sqrt(bossCounter));
     };
 }

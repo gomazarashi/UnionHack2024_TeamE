@@ -1,5 +1,6 @@
+//bossCharacter.js
 class BossCharacter {
-    constructor(ctx,gameView) {
+    constructor(ctx, gameView) {
         this.positionX = 320; // ボスの初期X位置
         this.positionY = 100;  // ボスの初期Y位置
         this.width = 80;      // ボスの幅
@@ -58,14 +59,14 @@ class BossCharacter {
     spawnOrbitingEnemies(bossCounter) {
         this.orbitingEnemyCount += bossCounter;
         this.orbitingEnemyRadius++;
-        this.orbitingEnemiesExistence = new Array(this.orbitingEnemyCount).fill(-1).map((v,i)=>parseInt(Math.random()*60));
+        this.orbitingEnemiesExistence = new Array(this.orbitingEnemyCount).fill(-1).map((v, i) => parseInt(Math.random() * 60));
         this.orbitingEnemies = [];
         const angleStep = (2 * Math.PI) / this.orbitingEnemyCount;
         for (let i = 0; i < this.orbitingEnemyCount; i++) {
             const angle = i * angleStep;
             const x = this.positionX + this.orbitingEnemyRadius * Math.cos(angle);
             const y = this.positionY + this.orbitingEnemyRadius * Math.sin(angle);
-            const enemy = new Enemy(x, y, 2, 2, 20, 100, 120, this.gameView); // 例: 速度やサイズ、スコアは適宜調整
+            const enemy = new RedEnemy(x, y, this.gameView) // 例: 速度やサイズ、スコアは適宜調整
             enemy.existence = false;
             this.orbitingEnemies.push(enemy);
         }
@@ -74,37 +75,37 @@ class BossCharacter {
     updateOrbitingEnemies() {
         const angleStep = (2 * Math.PI) / this.orbitingEnemyCount; // 敵機同士の間の角度
         const rotationSpeed = this.orbitingEnemySpeed * performance.now() / 1000; // 時間に基づく回転角度
-    
+
         this.orbitingEnemies.forEach((enemy, index) => {
             if (!enemy.existence) {
                 if (this.orbitingEnemiesExistence[index] < 0) {
                     this.orbitingEnemiesExistence[index] = 300;
-                }else if (this.orbitingEnemiesExistence[index] === 0) {
+                } else if (this.orbitingEnemiesExistence[index] === 0) {
                     enemy.existence = true;
                     this.orbitingEnemiesExistence[index] = -1;
-                }else{
+                } else {
                     this.orbitingEnemiesExistence[index] -= 1;
                 }
                 return;
             }
             // 各敵機の角度を計算し、時間に基づいて回転させる
             const angle = index * angleStep + rotationSpeed;
-    
+
             // 敵機の新しい位置を、ボスの現在位置を中心として計算
-            enemy.positionX = this.positionX + this.orbitingEnemyRadius * Math.cos(angle)-10;
-            enemy.positionY = this.positionY + this.orbitingEnemyRadius * Math.sin(angle)-10;
-    
-            
+            enemy.positionX = this.positionX + this.orbitingEnemyRadius * Math.cos(angle) - 10;
+            enemy.positionY = this.positionY + this.orbitingEnemyRadius * Math.sin(angle) - 10;
+
+
             // 敵機の描画
             enemy.drawEnemy(this.ctx);
             enemy.currentCooldown = this.orbitingEnemyInterval;
         });
-        if (this.orbitingEnemyInterval<=0) {
+        if (this.orbitingEnemyInterval <= 0) {
             this.orbitingEnemyInterval = 120;
         }
-        this.orbitingEnemyInterval --;
+        this.orbitingEnemyInterval--;
     }
-    
+
 
     removeOrbitingEnemy(enemy) {
         this.orbitingEnemies = this.orbitingEnemies.filter(e => e !== enemy);

@@ -1,3 +1,4 @@
+// enemyBlueBullet.js
 class EnemyBlueBullet extends EnemyBullet{
     constructor(x, y, Vx, Vy){
         super(x, y);
