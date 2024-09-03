@@ -66,7 +66,7 @@ class BossCharacter {
             const angle = i * angleStep;
             const x = this.positionX + this.orbitingEnemyRadius * Math.cos(angle);
             const y = this.positionY + this.orbitingEnemyRadius * Math.sin(angle);
-            const enemy = new Enemy(x, y, 2, 2, enemyConfigs.redEnemy, this.gameView) // 例: 速度やサイズ、スコアは適宜調整
+            const enemy = new RedEnemy(x, y, this.gameView) // 例: 速度やサイズ、スコアは適宜調整
             enemy.existence = false;
             this.orbitingEnemies.push(enemy);
         }

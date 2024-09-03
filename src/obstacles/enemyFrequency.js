@@ -27,11 +27,11 @@ class EnemyFrequency {
         const speedY = Math.random() * 3;
         const num = Math.random() * 3
         if (num < 1) {
-            return new Enemy(x, y, speedX, speedY, enemyConfigs.redEnemy, this.gameView)
+            return new RedEnemy(x, y, this.gameView);
         } else if (num < 2) {
-            return new Enemy(x, y, speedX, speedY, enemyConfigs.blueEnemy, this.gameView)
+            return new BlueEnemy(x, y, this.gameView);
         } else {
-            return new Enemy(x, y, speedX, speedY, enemyConfigs.greenEnemy, this.gameView)
+            return new GreenEnemy(x, y, this.gameView);
         }
     }
 
