@@ -1,15 +1,15 @@
-class mainView{
-    constructor(){
+class mainView {
+    constructor() {
         this.home = document.getElementById('home');
-        
+
         // ボタンを取得し、クリックイベントをバインド
         this.startButton = document.getElementById('start');
         this.optionButton = document.getElementById('optionButtom');
         this.helpButton = document.getElementById('helpButton');
 
-        this.startButton.addEventListener('click',()=>this.onClickButton('start'));
-        this.optionButton.addEventListener('click',()=>this.onClickButton('option'));
-        this.helpButton.addEventListener('click',()=>this.onClickButton('help'));
+        this.startButton.addEventListener('click', () => this.onClickButton('start'));
+        this.optionButton.addEventListener('click', () => this.onClickButton('option'));
+        this.helpButton.addEventListener('click', () => this.onClickButton('help'));
 
         this.option = document.getElementById('option');
 
@@ -24,7 +24,7 @@ class mainView{
 
         this.audioManager = new AudioManager();
 
-        this.gameview = new GameView(this.canvas,this.ctx,this,this.audioManager);
+        this.gameview = new GameView(this.canvas, this.ctx, this, this.audioManager);
 
         this.result = document.getElementById('result');
         this.result.style.display = 'none';
@@ -33,8 +33,8 @@ class mainView{
         this.helpView.style.display = 'none';
     }
 
-    switchView(NextSituation){
-        if (NextSituation===this.situation) {
+    switchView(NextSituation) {
+        if (NextSituation === this.situation) {
             return;
         }
         switch (this.situation) {
@@ -44,10 +44,10 @@ class mainView{
             case 'game':
                 this.canvas.style.display = 'none'
                 this.gameview.gameStop();
-                break;       
+                break;
             case 'result':
                 this.result.style.display = 'none';
-                break; 
+                break;
             case 'option':
                 this.option.style.display = 'none';
                 break;
@@ -98,24 +98,24 @@ class mainView{
         }
     }
 
-    handleEscapeKey(event){
-        if (event.key==='Escape') {
+    handleEscapeKey(event) {
+        if (event.key === 'Escape') {
             this.switchView('pause');
         }
     }
 
-    setVolume(volume){
-        this.audioManager.setVolume(volume/100);
+    setVolume(volume) {
+        this.audioManager.setVolume(volume / 100);
     }
 
-    setSEVolume(volume){
-        this.audioManager.setSEVolume(volume/100);
+    setSEVolume(volume) {
+        this.audioManager.setSEVolume(volume / 100);
     }
 
-    popHome(){
-        if (this.text.innerHTML==='pause') {
+    popHome() {
+        if (this.text.innerHTML === 'pause') {
             this.switchView('pause');
-        }else{
+        } else {
             this.switchView('home');
         }
     }
