@@ -1,3 +1,4 @@
+//enemyFrequency.js
 class EnemyFrequency{
     constructor(interval = 120, gameView){
         this.enemyList = new Array(10).fill(null);

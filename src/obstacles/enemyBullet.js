@@ -1,3 +1,4 @@
+// enemyBullet.js
 class EnemyBullet {
     constructor(x, y) {
         this.vectorX = 0;

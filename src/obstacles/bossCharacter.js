@@ -1,3 +1,4 @@
+//bossCharacter.js
 class BossCharacter {
     constructor(ctx,gameView) {
         this.positionX = 320; // ボスの初期X位置

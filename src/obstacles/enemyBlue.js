@@ -1,3 +1,4 @@
+// enemyBlue.js
 class EnemyBlue extends Enemy {
     constructor(x, y, speedX = 2, speedY = 2, size = 20, score = 100, shootInterval = 100, gameView) {
         super(x, y, speedX, speedY, size, score, shootInterval, gameView);

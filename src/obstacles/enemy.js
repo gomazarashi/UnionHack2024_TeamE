@@ -1,3 +1,4 @@
+// enemy.js
 class Enemy {
     constructor(x, y, speedX = 2, speedY = 2, size = 20, score = 100, shootInterval = 100, gameView) {
         this.positionX = x;
