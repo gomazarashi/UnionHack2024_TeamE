@@ -23,8 +23,6 @@ class EnemyFrequency {
     createEnemy() {
         const x = (Math.random() * 600) + 20;
         const y = Math.random() * 40 + 20;
-        const speedX = Math.random() * 3;
-        const speedY = Math.random() * 3;
         const num = Math.random() * 3
         if (num < 1) {
             return new RedEnemy(x, y, this.gameView);
