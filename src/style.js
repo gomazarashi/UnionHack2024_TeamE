@@ -51,7 +51,7 @@ class CanvasStyle {
 
     // ライフをリセットするメソッド
     resetLives() {
-        this.lives = 3;
+        this.lives = 5;
     }
 
     // スコアを加算するメソッド
