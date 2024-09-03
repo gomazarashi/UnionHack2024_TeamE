@@ -46,7 +46,7 @@ class Enemy {
     }
 
     dropItem() {
-        if (Math.random() <= 0.6) { // 60%の確率でアイテムを落とす
+        if (Math.random() <= 0.3) { // 60%の確率でアイテムを落とす
             const rand = Math.random();
             let itemType;
 
