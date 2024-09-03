@@ -24,7 +24,7 @@ class mainView{
 
         this.audioManager = new AudioManager();
 
-        this.gameview = new gameView(this.canvas,this.ctx,this,this.audioManager);
+        this.gameview = new GameView(this.canvas,this.ctx,this,this.audioManager);
 
         this.result = document.getElementById('result');
         this.result.style.display = 'none';

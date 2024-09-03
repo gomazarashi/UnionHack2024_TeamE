@@ -1,4 +1,5 @@
-class gameView {
+// gameView.js
+class GameView {
     constructor(canvas, ctx, mainview, audioManager) {
         this.ctx = ctx;
 
